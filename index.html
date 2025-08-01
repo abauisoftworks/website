@@ -738,7 +738,7 @@
     <header>
         <div class="hero">
             <h2>Hello! Welcome..</h2>
-            <p>We Have Our Free/Paid Scripts. Free Community Scripts. Free Executors!</p>
+            <p>We Have Our Free/Paid Scripts, Community Scripts. Executors!</p>
         </div>
     </header>
     <section class="scripts-sections">
@@ -749,6 +749,40 @@
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
         </div>
+	<div class="script-card" data-name="Anticheat Bypass" data-game="Steal a Brainrot">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/18695865484-1748212392549.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">Anti-Kick (Anti-Cheat Bypass)</h3>
+                    </div>
+                    <p class="script-type">Steal a Brainrot</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+local hk = false
+for _, v in pairs(getgc(true)) do
+    if typeof(v) == "table" then
+        local fn = rawget(v, "observeTag")
+        if typeof(fn) == "function" and not hk then
+            hk = true
+            hookfunction(fn, newcclosure(function(_, _)
+                return {
+                    Disconnect = function() end,
+                    disconnect = function() end
+                }
+            end))
+        end
+    end
+end
+                        <button class="copy-button" aria-label="Copy Script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+	</div>
         <div class="script-card" data-name="No Cooldown Block" data-game="Legacy FPE:S">
             <div class="script-image-container">
                     <img src="https://tr.rbxcdn.com/180DAY-188a97a524487218f6107d5259c8d25e/768/432/Image/Webp/noFilter" alt="Script Preview" class="script-image" data-images='["https://tr.rbxcdn.com/180DAY-188a97a524487218f6107d5259c8d25e/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-ffe378bbeeb1ab272768c8eb80f7518f/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-8a6098d4b38604fe6079725021ba8a51/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-92c4178c95e7da6d8d6daa142dda28fa/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-9647933b0457c74c714ec796d6f4d3d3/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-5ae3ebde4e92caf5acde869ae0cef567/768/432/Image/Webp/noFilter"]''>
@@ -951,29 +985,6 @@
                     <p class="script-author">Made By aabbaaii13/14</p>
                     <div class="script-code">
                         loadstring(game:HttpGet("https://rawscripts.net/raw/Natural-Disaster-Survival-Nds-V1-19343"))()
-                        <button class="copy-button" aria-label="Copy script">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="script-card" data-name="FYPAF" data-game="Flex Your Ping And FPS!">
-            <div class="script-image-container">
-                    <img src="https://scriptblox.com/images/script/18695865484-1748212392549.png" alt="Script Image" class="script-image">
-                </div>
-                <div class="script-content">
-                    <div class="script-header">
-                        <h3 class="script-title">FYPAF V3.1.5</h3>
-                    </div>
-                    <p class="script-type">Flex Your Ping And FPS!</p>
-                    <p class="script-author">Made By aabbaaii13/14</p>
-                    <div class="script-code">
-loadstring(game:HttpGet("https://rawscripts.net/raw/Big-Update-Flex-Your-Ping-And-FPS!-Fypaf-remake-18644"))()
-
--- get premium version at discord.gg/hnq9AGVMwq
                         <button class="copy-button" aria-label="Copy script">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
