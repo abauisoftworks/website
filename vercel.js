@@ -3,7 +3,7 @@ module.exports = {
     headers() {
       return [
         {
-          source: "/.well-known/apple-app-site-association",
+          source: "/scripts",
           headers: [{ key: "content-type", value: "application/json" }]
         }
       ];
