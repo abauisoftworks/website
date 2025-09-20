@@ -3,7 +3,7 @@ module.exports = {
     headers() {
       return [
         {
-          source: "/scripts",
+          source: "scripts",
           headers: [{ key: "content-type", value: "application/json" }]
         }
       ];
