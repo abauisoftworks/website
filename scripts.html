@@ -562,6 +562,16 @@
             text-decoration-thickness: 2px;
             text-underline-offset: 2px;
         }
+        .version-text {
+            position: absolute;
+            top: 32.5%;
+            right: 100%;
+            font-size: 0.6rem;
+            opacity: 0.5;
+            color: var(--text);
+            pointer-events: none;
+            font-family: 'General Sans', sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -569,6 +579,7 @@
         <a href="https://abaui.vercel.app" class="logo" style="text-decoration: none;">Abaui</a>
         <div class="nav-controls">
             <button class="theme-toggle">
+                <span class="version-text">V1.1.2</span>
                 <svg class="sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
@@ -592,7 +603,7 @@
     </nav>
     <section id="scripts"></section>
         <div class="search-container">
-            <input type="text" id="script-search" placeholder="Search scripts...">
+            <input type="text" id="script-search" placeholder="Search Scripts...">
             <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -614,6 +625,17 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                    <button class="raw-button" aria-label="Raw Script" 
+                        onclick="window.open('https://abaui.vercel.app/raw/abauihub.lua', '_blank')"
+                        data-scriptname="raw/asab">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
                         </svg>
                     </button>
                 </div>
@@ -793,41 +815,41 @@
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const themeToggle = document.querySelector('.theme-toggle');
-            themeToggle?.addEventListener('click', () => {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', newTheme);
-            });
-            const searchInput = document.getElementById('script-search');
-            const scriptCards = document.querySelectorAll('.script-card');
-            searchInput?.addEventListener('input', () => {
-                const searchTerm = searchInput.value.toLowerCase();
-                scriptCards.forEach(card => {
+            const si = document.getElementById('script-search');
+            const sc = document.querySelectorAll('.script-card');
+            si?.addEventListener('input', () => {
+                const st = si.value.toLowerCase();
+                sc.forEach(card => {
                     const title = card.querySelector('.script-title')?.textContent.toLowerCase();
                     const type = card.querySelector('.script-type')?.textContent.toLowerCase();
                     const author = card.querySelector('.script-author')?.textContent.toLowerCase();
                     const game = card.dataset.game?.toLowerCase();
-                    const isVisible = title?.includes(searchTerm) || 
-                                    type?.includes(searchTerm) || 
-                                    author?.includes(searchTerm) ||
-                                    game?.includes(searchTerm);
+                    const iv = title?.includes(st) || 
+                                    type?.includes(st) || 
+                                    author?.includes(st) ||
+                                    game?.includes(st);
                     
-                    card.style.display = isVisible ? 'block' : 'none';
+                    card.style.display = iv ? 'block' : 'none';
                 });
             });
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            menuToggle?.addEventListener('click', () => {
-                menuToggle.classList.toggle('active');
-                navLinks?.classList.toggle('active');
+            const theme = document.querySelector('.theme-toggle');
+            theme?.addEventListener('click', () => {
+                document.documentElement.setAttribute('data-theme', 
+                    document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+                );
+            });
+            const menu = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.nav-links');
+            menu?.addEventListener('click', () => {
+                nav?.classList.toggle('active');
+                menu.classList.toggle('active');
             });
             document.addEventListener('click', (e) => {
-                if (navLinks?.classList.contains('active') && 
+                if (nav?.classList.contains('active') && 
                     !e.target.closest('.nav-links') && 
                     !e.target.closest('.menu-toggle')) {
-                    navLinks.classList.remove('active');
-                    menuToggle?.classList.remove('active');
+                    nav.classList.remove('active');
+                    menu?.classList.remove('active');
                 }
             });
         });
