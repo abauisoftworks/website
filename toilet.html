@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abaui - Roblox Exploit Community</title>
+    <meta property="og:title" content="Abaui - Roblox Exploit Community">
+    <meta property="og:description" content="Roblox Exploiting Community Website For Our Scripts, Community Scripts, More">
+    <meta property="og:image" content="https://abaui-community.vercel.app/abaui.png">
+    <meta property="og:url" content="https://abaui-community.vercel.app">
+    <meta property="og:type" content="website">
+    <meta name="google-site-verification" content="CMoSnI9d3cfDpmT-q6PSWP8tUm-rHSFudxONM00_W4o" />
+    <link rel="icon" href="abaui.png" type="image/png">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=general-sans@500,600,700&f[]=clash-display@600,500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ffffff;
+            --secondary: #f8fafc;
+            --accent: #0ea5e9;
+            --text: #0f172a;
+            --surface: rgba(255, 255, 255, 0.7);
+            --gradient: linear-gradient(135deg, #0ea5e9, #6366f1);
+            --bg-gradient: linear-gradient(135deg, #f8fafc, #ffffff);
+            --text-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+            --hover-gradient: linear-gradient(135deg, #6366f1, #0ea5e9);
+            --hero-bg: rgba(255, 255, 255, 0.7);
+            --nav-bg: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(15, 23, 42, 0.05);
+            --hover-bg: rgba(14, 165, 233, 0.1);
+            --glow: 0 0 30px rgba(14, 165, 233, 0.15);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.05);
+            --transition: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        [data-theme="dark"] {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #38bdf8;
+            --text: #f8fafc;
+            --surface: rgba(15, 23, 42, 0.7);
+            --gradient: linear-gradient(135deg, #38bdf8, #6366f1);
+            --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b);
+            --text-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            --hover-gradient: linear-gradient(135deg, #6366f1, #38bdf8);
+            --hero-bg: rgba(15, 23, 42, 0.7);
+            --nav-bg: rgba(15, 23, 42, 0.7);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --hover-bg: rgba(56, 189, 248, 0.1);
+            --glow: 0 0 30px rgba(56, 189, 248, 0.15);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+        body {
+            font-family: 'General Sans', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text);
+            line-height: 1.5;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        .nav {
+            position: fixed;
+            width: 100%;
+            padding: 1.25rem 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px) saturate(180%);
+            -webkit-backdrop-filter: blur(10px) saturate(180%);
+            z-index: 1000;
+            transform: translateY(-100%);
+            animation: slideDown 1s var(--transition) forwards;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .logo {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            letter-spacing: -0.02em;
+            transition: all 1s ease;
+        }
+        .logo:hover {
+            background: var(--hover-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: var(--text-shadow);
+            transform: translateY(-1px);
+        }
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: all 1s var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-links a:hover {
+            opacity: 1;
+            background: var(--hover-bg);
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+            transition: all 1s var(--transition);
+            border-radius: 5px;
+        }
+        .nav-links a::after {
+            border-radius: 15px;
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 1s var(--transition);
+        }
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        .theme-toggle {
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            color: var(--text);
+            transition: all 1s var(--transition);
+            position: relative;
+        }
+        .theme-toggle:hover {
+            background: var(--secondary);
+            transform: scale(1.1);
+        }
+        .theme-toggle:active {
+            transform: scale(0.9);
+        }
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+            transition: all 1s var(--transition);
+        }
+        .theme-toggle .moon {
+            display: none;
+        }
+        [data-theme="dark"] .theme-toggle .sun {
+            display: none;
+        }
+        [data-theme="dark"] .theme-toggle .moon {
+            display: block;
+        }
+        .background-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient);
+            filter: blur(80px);
+            opacity: 0.1;
+            mix-blend-mode: overlay;
+        }
+        .shape-1 {
+            top: 10%;
+            left: 10%;
+            width: 400px;
+            height: 400px;
+            animation: floatAnimation 20s ease-in-out infinite;
+        }
+        .shape-2 {
+            bottom: 10%;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            animation: floatAnimation 15s ease-in-out infinite reverse;
+        }
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero {
+            text-align: center;
+            max-width: 800px;
+            padding: 4rem;
+            background: var(--surface);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+            transform-style: preserve-3d;
+            transform: perspective(1000px) translateZ(0);
+            transition: all 1s var(--transition);
+            will-change: transform;
+        }
+        .hero:hover {
+            transform: perspective(1000px) translateZ(50px) rotateX(2deg);
+            box-shadow: var(--shadow-lg), var(--glow);
+        }
+        .hero h2 {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 4.1rem;
+            font-weight: 600;
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: 
+                heroFadeUp 1s var(--transition) forwards,
+                textGradientSlide 8s linear infinite;
+            text-shadow: var(--text-shadow);
+            position: relative;
+            padding-bottom: 2rem;
+        }
+        .hero h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 400px;
+            height: 2px;
+            background: var(--gradient);
+            transition: transform 1s var(--transition);
+        }
+        .hero:hover h2::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+        .hero p {
+            font-size: 1.75rem;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeUp 1s var(--transition) forwards 0.2s;
+            background: linear-gradient(90deg, var(--text) 0%, var(--text) 50%, var(--accent) 50%, var(--accent) 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 1s var(--transition);
+        }
+        .hero:hover p {
+            background-position: -100% 0;
+            transform: translateY(-2px);
+        }
+        @keyframes textGradientSlide {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes floatAnimation {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg); 
+                opacity: 0.1;
+            }
+            50% { 
+                transform: translate(-20px, 20px) rotate(5deg); 
+                opacity: 0.15;
+            }
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes heroFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1.25rem 5%;
+            }
+            .nav-links {
+                display: flex;
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                background: var(--surface);
+                backdrop-filter: blur(10px);
+                padding: 5rem 2rem;
+                min-width: 250px;
+                flex-direction: column;
+                gap: 1rem;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+            .menu-toggle {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: none;
+                border: none;
+                padding: 0;
+                margin-left: 0.5rem;
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+                position: relative;
+                z-index: 2050;
+                transition: background 0.5s;
+                transition: transform 0.5s;
+            }
+            .menu-toggle:hover {
+                transform: scale(0.9);
+            }
+            .menu-toggle span {
+                display: block;
+                width: 30px;
+                height: 2px;
+                background: var(--text);
+                border-radius: 10px;
+                margin: 4px 0;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                position: relative;
+            }
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(9.5px) rotate(45deg);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-9.5px) rotate(-45deg);
+            }
+            .hero {
+                padding: 5rem 5rem;
+                margin: 1rem;
+            }
+            .hero h2 {
+                font-size: 3rem;
+                padding-bottom: 1.5rem;
+            }
+            .hero h2::after {
+                width: 200px;
+            }
+            .hero p {
+                font-size: 1.25rem;
+                margin-bottom: 2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .nav {
+                padding: 1rem 4%;
+            }
+            .logo {
+                font-size: 1.25rem;
+            }
+            .hero {
+                padding: 2rem 1.5rem;
+                margin: 0.5rem;
+            }
+            .hero h2 {
+                font-size: 2rem;
+                padding-bottom: 1.25rem;
+            }
+            .hero h2::after {
+                width: 150px;
+            }
+            .hero p {
+                font-size: 0.875rem;
+                margin-bottom: 1.5rem;
+            }
+            .nav-links {
+                min-width: 200px;
+                padding: 4rem 1.5rem;
+            }
+            .shape-1, .shape-2 {
+                width: 150px;
+                height: 150px;
+            }
+            .theme-toggle, .menu-toggle {
+                width: 30px;
+                height: 30px;
+            }
+            .theme-toggle svg, .menu-toggle svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        @media (max-width: 360px) {
+            .hero h2 {
+                font-size: 1.75rem;
+            }
+            .hero p {
+                font-size: 0.75rem;
+            }
+            .nav-links {
+                min-width: 180px;
+            }
+        }
+        @media (min-width: 1024px) {
+            .hero {
+                max-width: 1000px;
+                padding: 6rem;
+            }
+            .hero h2 {
+                font-size: 5rem;
+            }
+            .hero p {
+                font-size: 2rem;
+            }
+        }
+        @media (min-width: 1440px) {
+            .nav {
+                padding: 1.5rem 10%;
+            }
+            .logo {
+                font-size: 1.75rem;
+            }
+            .hero {
+                max-width: 1200px;
+                padding: 7rem;
+            }
+            .hero h2 {
+                font-size: 6rem;
+            }
+        }
+        @media (min-width: 1920px) {
+            .nav {
+                padding: 1.75rem 12%;
+            }
+            .hero {
+                max-width: 1400px;
+            }
+            .shape-1 {
+                width: 600px;
+                height: 600px;
+            }
+            .shape-2 {
+                width: 500px;
+                height: 500px;
+            }
+        }
+        @media (min-width: 2000px) {
+            html {
+                font-size: 20px;
+            }
+            .hero {
+                max-width: 1800px;
+                padding: 6.5rem;
+            }
+            .hero h2 {
+                font-size: 7.5rem;
+            }
+            .hero p {
+                font-size: 2rem;
+            }
+        }
+        .scripts-sections {
+            padding: 2rem 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .script-card {
+            width: 100%;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1rem;
+        }
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .search-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+        }
+        #script-search {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-right: 3rem;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            background: var(--surface);
+            color: var(--text);
+            font-family: 'General Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s var(--transition);
+        }
+        #script-search:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: var(--glow);
+        }
+        .search-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text);
+            opacity: 0.5;
+        }
+        .script-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg), var(--glow);
+        }
+        .script-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 16px 16px 0 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .script-content {
+            padding: 1.5rem;
+        }
+        .script-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .script-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        .script-type {
+            font-size: 0.75rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        .script-author {
+            font-size: 0.875rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+        .script-code {
+            background: var(--secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.875rem;
+            position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .script-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 16px 16px 0 0;
+        }
+        .image-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--surface);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: background 1s ease, opacity 1s ease;
+            border: 1px solid var(--border-color);
+            color: var(--text);
+        }
+        .image-nav:hover {
+            background: var(--hover-bg);
+            transform: translateY(-50%);
+            opacity: 0.75;
+        }
+        .script-image-container:hover .image-nav {
+            opacity: 0.75;
+        }
+        .image-nav.prev {
+            left: 10px;
+        }
+        .image-nav.next {
+            right: 10px;
+        }
+        .script-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .script-title:hover {
+            color: var(--accent);
+            text-decoration: underline;
+            text-decoration-color: var(--accent);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 2px;
+            transform: translateY(-2px);
+        }
+        .script-author:hover {
+            color: var(--accent);
+            text-decoration: underline;
+            text-decoration-color: var(--accent);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 2px;
+            transform: translateY(-2px);
+        }
+        .script-code:hover {
+            white-space: normal;
+            word-wrap: break-word;
+            overflow: visible;
+            max-height: 200px;
+            transition: max-height 1s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background: var(--hover-bg);
+            color: var(--text);
+        }
+        .copy-button {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--surface);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text);
+            transition: all 1s var(--transition);
+        }
+        .copy-button:hover {
+            background: var(--hover-bg);
+            transform: scale(1.1);
+        }
+        .copy-button:active {
+            transform: scale(0.9);
+        }
+        .raw-button {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            background: var(--surface);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text);
+            transition: all 1s var(--transition);
+        }
+        .raw-button:hover {
+            background: var(--hover-bg);
+            transform: scale(1.1);
+        }
+        .raw-button:active {
+            transform: scale(0.9);
+        }
+        .script-type:hover {
+            color: var(--text);
+            text-decoration: underline;
+            text-decoration-color: var(--accent);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 2px;
+        }
+        .content-wrapper {
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        .section-tab {
+            padding: 0.75rem 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text);
+            cursor: pointer;
+            font-family: 'General Sans', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s var(--transition);
+        }
+        .section-tab.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        .section-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+        .scripts-sections,
+        .executors-section {
+            display: none;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .scripts-sections.active,
+        .executors-section.active {
+            display: block;
+        }
+        .executors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .executor-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .executor-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg), var(--glow);
+        }
+        .executor-image {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+        }
+        .executor-content {
+            padding: 1.5rem;
+        }
+        .executor-title {
+            font-family: 'Clash Display', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        .executor-description {
+            font-size: 0.875rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        .executor-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        .download-button,
+        .key-button {
+            flex: 1;
+            padding: 0.75rem;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s var(--transition);
+            text-decoration: none;
+        }
+        .download-button {
+            background: var(--accent);
+            color: white;
+        }
+        .key-button {
+            background: var(--secondary);
+            color: var(--text);
+            border: 1px solid var(--border-color);
+        }
+        .download-button:hover,
+        .key-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 768px) {
+            .executors-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-tabs {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .section-tab {
+                flex: 1;
+                min-width: 120px;
+                text-align: center;
+            }
+        }
+        .executor-author {
+            font-size: 0.875rem;
+            color: var(--text);
+            opacity: 0.8;
+            margin-bottom: 1rem;
+            transition: all 0.3s var(--transition);
+        }
+        .executor-author:hover {
+            color: var(--accent);
+            text-decoration: underline;
+            text-decoration-color: var(--accent);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 2px;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+    <nav class="nav">
+        <div class="logo">Abaui</div>
+        <div class="nav-controls">
+            <button class="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="https://discord.gg/hnq9AGVMwq" target="_blank"><span>Discord</span></a></li>
+                <li><a href="https://github.com/CaseohCASEOH" target="_blank"><span>Github</span></a></li>
+                <li><a href="https://www.youtube.com/@aabbaaii13" target="_blank"><span>YouTube</span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <header>
+        <div class="hero">
+            <h2>Hello! Welcome..</h2>
+            <p>Scripts & Executors All In One Place!</p>
+        </div>
+    </header>
+    <div class="content-wrapper">
+    <div class="section-tabs">
+        <button class="section-tab active" data-section="scripts">Scripts</button>
+        <button class="section-tab" data-section="executors">Executors</button>
+    </div>
+
+    <section id="scripts" class="scripts-sections active"></section>
+        <div class="search-container">
+            <input type="text" id="script-search" placeholder="Search scripts...">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </div>
+    </section>
+        <div class="script-card" data-name="No Cooldown Block" data-game="Legacy FPE:S">
+            <div class="script-image-container">
+                    <img src="https://tr.rbxcdn.com/180DAY-188a97a524487218f6107d5259c8d25e/768/432/Image/Webp/noFilter" alt="Game Thumbnail" class="script-image" data-images='["https://tr.rbxcdn.com/180DAY-188a97a524487218f6107d5259c8d25e/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-ffe378bbeeb1ab272768c8eb80f7518f/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-8a6098d4b38604fe6079725021ba8a51/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-92c4178c95e7da6d8d6daa142dda28fa/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-9647933b0457c74c714ec796d6f4d3d3/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-5ae3ebde4e92caf5acde869ae0cef567/768/432/Image/Webp/noFilter"]''>
+                    <button class="image-nav prev" aria-label="Previous image">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="image-nav next" aria-label="Next image">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">No Cooldown Block</h3>
+                    </div>
+                    <p class="script-type">Legacy FPE:S</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Legacy-FPE:S-No-Cooldown-Block-36773"))()
+                        <button class="copy-button" aria-label="Copy Script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                        <button class="raw-button" aria-label="Raw Script"
+                            data-scriptname="https://abaui.vercel.app\raw\nocooldownblock">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="script-card" data-name="FPEScript" data-game="Legacy FPE:S">
+                <div class="script-image-container">
+                        <img src="https://tr.rbxcdn.com/180DAY-188a97a524487218f6107d5259c8d25e/768/432/Image/Webp/noFilter" alt="Script Preview" class="script-image" data-images='["https://tr.rbxcdn.com/180DAY-188a97a524487218f6107d5259c8d25e/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-ffe378bbeeb1ab272768c8eb80f7518f/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-8a6098d4b38604fe6079725021ba8a51/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-92c4178c95e7da6d8d6daa142dda28fa/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-9647933b0457c74c714ec796d6f4d3d3/768/432/Image/Webp/noFilter", "https://tr.rbxcdn.com/180DAY-5ae3ebde4e92caf5acde869ae0cef567/768/432/Image/Webp/noFilter"]''>
+                        <button class="image-nav prev" aria-label="Previous image">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
+                        <button class="image-nav next" aria-label="Next image">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="script-content">
+                        <div class="script-header">
+                            <h3 class="script-title">FPEScript V1</h3>
+                        </div>
+                        <p class="script-type">Legacy FPE:S</p>
+                        <p class="script-author">Made By aabbaaii13/14</p>
+                        <div class="script-code">
+                            loadstring(game:HttpGet("https://rawscripts.net/raw/Legacy-FPE:S-FPEScript-V1-36266"))()
+                            <button class="copy-button" aria-label="Copy script">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                            <button class="raw-button" aria-label="Raw Script"
+                                data-scriptname="fpescript">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="script-card" data-name="Abaui Searcher" data-game="Universal">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/8898279-1736411827549.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">Abaui Searcher V1.3</h3>
+                    </div>
+                    <p class="script-type">Universal Script</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Abaui-Searcher-V1-26326"))()
+                        <button class="copy-button" aria-label="Copy script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="script-card" data-name="Console Opener" data-game="Universal">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/5299306-1731087066837.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">Console Opener</h3>
+                    </div>
+                    <p class="script-type">Universal Script</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Console-Opener-21881"))()
+                        <button class="copy-button" aria-label="Copy script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="script-card" data-name="Fps Counter" data-game="Universal">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/0-1747595363945.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">Fps Counter V1.5</h3>
+                    </div>
+                    <p class="script-type">Universal Script</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Fps-Counter-Beta-21767"))()
+                        <button class="copy-button" aria-label="Copy script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="script-card" data-name="FE FLY AND VFLY GUI" data-game="Universal">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/3625119-1729892748400.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">FE FLY AND VFLY GUI</h3>
+                    </div>
+                    <p class="script-type">Universal Script</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-VFLY-AND-FLY-GUI-21056"))()
+                        <button class="copy-button" aria-label="Copy script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="script-card" data-name="Blindness" data-game="Universal">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/1124163-1729276234076.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">Blindness</h3>
+                    </div>
+                    <p class="script-type">Universal Script</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Blindness-20533"))()
+                        <button class="copy-button" aria-label="Copy script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="script-card" data-name="Abaui Hub" data-game="Universal">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/5341918-1729085221977.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">Abaui Hub</h3>
+                    </div>
+                    <p class="script-type">Universal Script</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Abaui-Hub-20004"))()
+                        <button class="copy-button" aria-label="Copy script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="script-card" data-name="Nds" data-game="Natural Disaster Survival">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/189707-1727705523697.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">Nds v1.5</h3>
+                    </div>
+                    <p class="script-type">Natural Disaster Survival</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Natural-Disaster-Survival-Nds-V1-19343"))()
+                        <button class="copy-button" aria-label="Copy script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="script-card" data-name="FYPAF" data-game="Flex Your Ping And FPS!">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/18695865484-1748212392549.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">FYPAF V3.1.5</h3>
+                    </div>
+                    <p class="script-type">Flex Your Ping And FPS!</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+loadstring(game:HttpGet("https://rawscripts.net/raw/Big-Update-Flex-Your-Ping-And-FPS!-Fypaf-remake-18644"))()
+
+-- get premium version at discord.gg/hnq9AGVMwq
+                        <button class="copy-button" aria-label="Copy script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="script-card" data-name="Notification System" data-game="Universal">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/3368603-1725633289968.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">Notification System</h3>
+                    </div>
+                    <p class="script-type">Universal Script</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+game:GetService("StarterGui"):SetCore("SendNotification", { 
+	Title = "title here";
+	Text = "text here";
+	Icon = "rbxthumb://type=Asset&id=id here&w=150&h=150"})
+Duration = 5;
+                        <button class="copy-button" aria-label="Copy script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="script-card" data-name="Invite Friend GUI" data-game="Universal">
+            <div class="script-image-container">
+                    <img src="https://scriptblox.com/images/script/1863506-1724701791775.png" alt="Script Image" class="script-image">
+                </div>
+                <div class="script-content">
+                    <div class="script-header">
+                        <h3 class="script-title">Invite Friend GUI fixed</h3>
+                    </div>
+                    <p class="script-type">Universal Script</p>
+                    <p class="script-author">Made By aabbaaii13/14</p>
+                    <div class="script-code">
+                        loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-FE-VFLY-AND-FLY-GUI-21056"))()
+                        <button class="copy-button" aria-label="Copy script">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle?.addEventListener('click', () => {
+                document.documentElement.setAttribute('data-theme', 
+                    document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+                );
+            });
+
+            const searchInput = document.getElementById('script-search');
+            const scriptCards = document.querySelectorAll('.script-card');
+            const executorCards = document.querySelectorAll('.executor-card');
+
+            searchInput?.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const activeSection = document.querySelector('.section-tab.active').dataset.section;
+                
+                if (activeSection === 'scripts') {
+                    scriptCards.forEach(card => {
+                        const title = card.querySelector('.script-title')?.textContent.toLowerCase();
+                        const type = card.querySelector('.script-type')?.textContent.toLowerCase();
+                        const author = card.querySelector('.script-author')?.textContent.toLowerCase();
+                        const game = card.dataset.game?.toLowerCase();
+                        
+                        const isVisible = title?.includes(searchTerm) || 
+                                        type?.includes(searchTerm) || 
+                                        author?.includes(searchTerm) ||
+                                        game?.includes(searchTerm);
+                        
+                        card.style.display = isVisible ? 'block' : 'none';
+                    });
+                } else {
+                    executorCards.forEach(card => {
+                        const title = card.querySelector('.executor-title')?.textContent.toLowerCase();
+                        const author = card.querySelector('.executor-author')?.textContent.toLowerCase();
+                        const desc = card.querySelector('.executor-description')?.textContent.toLowerCase();
+                        
+                        const isVisible = title?.includes(searchTerm) || 
+                                        author?.includes(searchTerm) ||
+                                        desc?.includes(searchTerm);
+                        
+                        card.style.display = isVisible ? 'block' : 'none';
+                    });
+                }
+            });
+
+            // Image Slider
+            document.querySelectorAll('.script-image-container').forEach(container => {
+                const img = container.querySelector('.script-image');
+                if (!img?.dataset.images) return;
+                
+                const images = JSON.parse(img.dataset.images);
+                let currentIndex = 0;
+                let autoplayInterval;
+
+                const changeImage = (nextIndex) => {
+                    img.style.opacity = '0';
+                    setTimeout(() => {
+                        currentIndex = nextIndex;
+                        img.src = images[currentIndex];
+                        img.style.opacity = '1';
+                    }, 300);
+                };
+
+                const startAutoplay = () => {
+                    autoplayInterval = setInterval(() => {
+                        const nextIndex = (currentIndex + 1) % images.length;
+                        changeImage(nextIndex);
+                    }, 7000);
+                };
+
+                const stopAutoplay = () => {
+                    if (autoplayInterval) {
+                        clearInterval(autoplayInterval);
+                    }
+                };
+
+                container.querySelector('.prev')?.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nextIndex = (currentIndex - 1 + images.length) % images.length;
+                    changeImage(nextIndex);
+                    stopAutoplay();
+                    startAutoplay();
+                });
+
+                container.querySelector('.next')?.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nextIndex = (currentIndex + 1) % images.length;
+                    changeImage(nextIndex);
+                    stopAutoplay();
+                    startAutoplay();
+                });
+
+                startAutoplay();
+                container.addEventListener('mouseenter', stopAutoplay);
+                container.addEventListener('mouseleave', startAutoplay);
+            });
+
+            // Section Tabs with Search Placeholder Update
+            document.querySelectorAll('.section-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and sections
+                    document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.scripts-sections, .executors-section').forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding section
+                    tab.classList.add('active');
+                    const sectionId = tab.dataset.section;
+                    document.getElementById(sectionId)?.classList.add('active');
+
+                    // Update search placeholder based on active section
+                    if (searchInput) {
+                        searchInput.placeholder = `Search ${sectionId}...`;
+                        // Clear previous search
+                        searchInput.value = '';
+                        scriptCards.forEach(card => card.style.display = 'block');
+                        executorCards.forEach(card => card.style.display = 'block');
+                    }
+                });
+            });
+
+            // Copy Button Functionality
+            document.querySelectorAll('.copy-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const scriptCode = button.parentElement.childNodes[0].textContent.trim();
+                    navigator.clipboard.writeText(scriptCode).then(() => {
+                        const originalSVG = button.innerHTML;
+                        button.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        `;
+                        
+                        setTimeout(() => {
+                            button.innerHTML = originalSVG;
+                        }, 1000);
+                    }).catch(err => console.error('Failed to copy:', err));
+                });
+            });
+
+            // Raw Button Functionality
+            document.querySelectorAll('.raw-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const scriptName = button.getAttribute('data-scriptname');
+                    if (scriptName) {
+                        window.open(scriptName, '_blank');
+                    }
+                });
+            });
+
+            // Mobile Menu Toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+
+            menuToggle?.addEventListener('click', () => {
+                navLinks?.classList.toggle('active');
+                menuToggle.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (navLinks?.classList.contains('active') && 
+                    !e.target.closest('.nav-links') && 
+                    !e.target.closest('.menu-toggle')) {
+                    navLinks.classList.remove('active');
+                    menuToggle?.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
