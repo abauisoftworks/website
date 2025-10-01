@@ -1,6 +1,6 @@
 local support = {
     [3101667897] = "https://raw.githubusercontent.com/CaseohCASEOH/aabbaaii/refs/heads/main/LOS.lua",
-    [189707] = "https://raw.githubusercontent.com/CaseohCASEOH/aabbaaii/refs/heads/main/NDS"
+    [121864768012064] = "https://raw.githubusercontent.com/CaseohCASEOH/aabbaaii/refs/heads/main/fishit.lua"
 }
 
 local place = game.PlaceId
