@@ -1,7 +1,7 @@
 local support = {
     [3101667897] = "https://raw.githubusercontent.com/CaseohCASEOH/aabbaaii/refs/heads/main/LOS.lua",
-    [121864768012064] = "https://raw.githubusercontent.com/CaseohCASEOH/aabbaaii/refs/heads/main/fishit.lua"
-    [16812449989] = "https://raw.githubusercontent.com/CaseohCASEOH/aabbaaii/refs/heads/main/fpe.lua"
+    [121864768012064] = "https://raw.githubusercontent.com/CaseohCASEOH/aabbaaii/refs/heads/main/fishit.lua",
+    [16812449989] = "https://raw.githubusercontent.com/CaseohCASEOH/aabbaaii/refs/heads/main/fpe.lua",
     [135880624242201] = "https://raw.githubusercontent.com/CaseohCASEOH/aabbaaii/refs/heads/main/CT.lua"
 }
 
