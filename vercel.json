@@ -1,0 +1,17 @@
+{
+  "headers": [
+    {
+      "source": "/raw/(.*)",
+      "headers": [
+        { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
+        { "key": "Content-Disposition", "value": "inline" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/raw/(.*)",
+      "destination": "/raw/$1.lua"
+    }
+  ]
+}
