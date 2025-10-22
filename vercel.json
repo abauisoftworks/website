@@ -9,9 +9,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/raw/(.*)",
-      "destination": "/raw/$1.lua"
-    }
+  { "source": "/raw/(.*)", "destination": "/raw/$1.lua" }
   ]
 }
