@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).send("Only POST Requests Allowed!")
+    return res.status(405).end("Only POST Requests Allowed!")
 
   let body = {}
   const chunks = []
