@@ -10,5 +10,10 @@
   ],
   "rewrites": [
     { "source": "/raw/(.*)", "destination": "/raw/$1" }
-  ]
+  ],
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs20.x"
+    }
+  }
 }
