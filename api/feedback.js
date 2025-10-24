@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).end("Only POST Requests Allowed!")
+  if (req.method !== "POST") 
+    return res.status(405).json({ error: "Only POST Requests Allowed!" })
 
   let body = {}
   const chunks = []
@@ -23,17 +23,17 @@ export default async function handler(req, res) {
         content: "<@1138813124946956298>",
         embeds: [
           {
-            title: "somebody suggested a new features or ui changes",
+            title: "Someone Suggested A New Features Or UI Changes",
             description: clean,
-            fields: [{ name: "their userid (used to ban them)", value: String(userid), inline: false }],
+            fields: [{ name: "Their UserID (Used To Ban Them)", value: String(userid), inline: false }],
             timestamp: new Date().toISOString()
           }
         ]
       })
     })
   } catch (err) {
-    console.error("webhook error", err)
+    console.error("Something Went Wrong: ", err)
   }
 
   return res.status(200).json({ ok: true })
-  }
+}
