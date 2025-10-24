@@ -10,5 +10,5 @@
   ],
   "rewrites": [
     { "source": "/raw/(.*)", "destination": "/raw/$1" }
-  ],
+  ]
 }
