@@ -12,6 +12,5 @@
     { "source": "/raw/(.*)", "destination": "/raw/$1" },
     { "source": "/scripts", "destination": "/scripts.html" },
     { "source": "/executors", "destination": "/executors.html" }
-    { "source": "/", "destination": "/home.html" }
   ]
 }
