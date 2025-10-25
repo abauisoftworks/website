@@ -16,7 +16,7 @@
   "version": 2,
   "functions": {
     "api/feedback.js": {
-      "runtime": "vercel/node@20.x"
+      "runtime": "vercel/node@22.x"
     }
   }
 }
