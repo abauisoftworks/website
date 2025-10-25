@@ -13,9 +13,10 @@
     { "source": "/scripts", "destination": "/scripts.html" },
     { "source": "/executors", "destination": "/executors.html" }
   ],
+  "version": 2,
   "functions": {
     "api/*.js": {
-      "runtime": "nodejs22.x"
+      "runtime": "vercel/node@20.x"
     }
   }
 }
