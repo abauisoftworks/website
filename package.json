@@ -1,3 +1,16 @@
 {
-  "type": "module"
+  "name": "webhook-app",
+  "version": "1.0.0",
+  "main": "api/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node api/index.js"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "express": "^4.21.1",
+    "axios": "^1.7.2"
+  }
 }
