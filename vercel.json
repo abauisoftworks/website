@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "headers": [
     {
       "source": "/raw/(.*)",
@@ -13,10 +14,9 @@
     { "source": "/scripts", "destination": "/scripts.html" },
     { "source": "/executors", "destination": "/executors.html" }
   ],
-  "version": 2,
   "functions": {
     "api/feedback.js": {
-      "runtime": "vercel/node@22.x"
+      "runtime": "nodejs22.x"
     }
   }
 }
