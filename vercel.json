@@ -1,5 +1,15 @@
 {
   "version": 2,
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "vercel/node@22.x"
+    }
+  },
+  "rewrites": [
+    { "source": "/raw/(.*)", "destination": "/raw/$1" },
+    { "source": "/scripts", "destination": "/scripts.html" },
+    { "source": "/executors", "destination": "/executors.html" }
+  ],
   "headers": [
     {
       "source": "/raw/(.*)",
@@ -8,15 +18,5 @@
         { "key": "Content-Disposition", "value": "inline" }
       ]
     }
-  ],
-  "rewrites": [
-    { "source": "/raw/(.*)", "destination": "/raw/$1" },
-    { "source": "/scripts", "destination": "/scripts.html" },
-    { "source": "/executors", "destination": "/executors.html" }
-  ],
-  "functions": {
-    "api/feedback.js": {
-      "runtime": "nodejs22.x"
-    }
-  }
+  ]
 }
