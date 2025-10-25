@@ -14,3 +14,10 @@
     { "source": "/executors", "destination": "/executors.html" }
   ]
 }
+{
+  "functions": {
+    "api/*.js": {
+      "runtime": "nodejs22.x"
+    }
+  }
+}
