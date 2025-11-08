@@ -1,9 +1,9 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Only POST Requests ALLOWED!' });
+    return res.status(405).json({ error: 'Only POST Requests ALLOWED' });
   }
   if (!process.env.DETECTION_HOOK) {
-    return res.status(500).json({ error: 'Something Went Wrong With Server Configuration.' });
+    return res.status(500).json({ error: 'Something Went Wrong With Server Configuration' });
   }
 
   try {
@@ -20,6 +20,7 @@ export default async function handler(req, res) {
       applied_tags,
       attachments
     } = req.body;
+    
     const payload = {
       content: content || undefined,
       username: username || undefined,
@@ -32,6 +33,7 @@ export default async function handler(req, res) {
       applied_tags: applied_tags || undefined,
       attachments: attachments || undefined
     };
+    
     const requestOptions = {
       method: 'POST',
       headers: {
@@ -39,5 +41,15 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify(payload)
     };
+
+    const discordResponse = await fetch(process.env.DETECTION_HOOK, requestOptions);
+
+    if (!discordResponse.ok) {
+      return res.status(502).json({ error: 'API Couldnt Send The Message To API' });
+    }
+
+    res.status(200).json({ success: true, message: 'The Message Successfully Sent To API' });
+  } catch (error) {
+    res.status(500).json({ error: 'Something Happened To The Internal Server' });
   }
 }
