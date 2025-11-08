@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       attachments: attachments || undefined
     };
     
-    const requestOptions = {
+    const requestoptions = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -42,9 +42,9 @@ export default async function handler(req, res) {
       body: JSON.stringify(payload)
     };
 
-    const discordResponse = await fetch(process.env.DETECTION_HOOK, requestOptions);
+    const discordresponse = await fetch(process.env.DETECTION_HOOK, requestoptions);
 
-    if (!discordResponse.ok) {
+    if (!discordresponse.ok) {
       return res.status(502).json({ error: 'API Couldnt Send The Message To API' });
     }
 
