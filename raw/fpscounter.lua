@@ -1,6 +1,6 @@
 -- credit aabbaaii13/14 if you modified this script
 if not game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("TopbarStandard") then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/CaseohCASEOH/aabbaaii/refs/heads/main/Topbar.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/aabbaaii13/aabbaaii/refs/heads/main/Topbar.lua"))()
 end
 
 local screengui = game:GetService("Players").LocalPlayer.PlayerGui.TopbarStandard.Holders.Left
@@ -12,7 +12,7 @@ frame.Name = "Widget"
 frame.Size = UDim2.new(0, 44, 0, 44)
 frame.Position = UDim2.new(0.85, 0, 0, 0)
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
-frame.BackgroundTransparency = 0.3
+frame.BackgroundTransparency = 0.1
 
 textlabel.Size = UDim2.new(1, 0, 1, 0)
 textlabel.BackgroundTransparency = 1
@@ -35,4 +35,5 @@ game:GetService("RunService").RenderStepped:Connect(function(q)
         n = 0
         o = 0
     end
+
 end)
