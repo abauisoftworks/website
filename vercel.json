@@ -9,7 +9,7 @@
     }
   ],
   "rewrites": [
-    { "source": "/raw/(.*)", "destination": "/raw/$1" },
+    { "source": "/raw/(.*)", "destination": "/api/raw/$1" },
     { "source": "/scripts", "destination": "/scripts.html" },
     { "source": "/executors", "destination": "/executors.html" }
   ]
