@@ -1,5 +1,5 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "headers": [
     {
       "source": "/raw/(.*)",
@@ -10,7 +10,8 @@
     }
   ],
   "rewrites": [
-    { "source": "/raw/(.*)", "destination": "/raw/$1" },
+    { "source": "/raw/(.*)", "destination": "/raw/$1.lua" },
+    { "source": "/raw/(.*)", "destination": "/raw/$1.txt" },
     { "source": "/scripts", "destination": "/scripts.html" },
     { "source": "/executors", "destination": "/executors.html" }
   ]
