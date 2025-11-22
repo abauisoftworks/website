@@ -71,16 +71,9 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
   Button1 = "Understood."
 })
 game:GetService("StarterGui"):SetCore("SendNotification", {
-  Title = "? IMPORTANT NOTE ?",
-  Text = "This Script Has No GUI.",
-  Duration = 12.5,
-  Callback = nil,
-  Button1 = "Okay."
-})
-game:GetService("StarterGui"):SetCore("SendNotification", {
   Title = "✓ HOW TO TOGGLE ✓",
   Text = "Rejoin Server To Disable The Script.",
-  Duration = 7.5,
+  Duration = 12.5,
   Callback = nil,
   Button1 = "Understood."
 })
