@@ -86,19 +86,4 @@ game:GetService("StarterGui"):SetCore("SendNotification", {
 })
 
 -- plsa executer.
-local targetGameId = 155615604
-local currentGameId = game.GameId
-
-if currentGameId ~= targetGameId then
-    local StarterGui = game:GetService("StarterGui")
-    StarterGui:SetCore("SendNotification", {
-        title = "! GAME !";
-        text = "Unsupported Game";
-		Callback = nil,
-		Button1 = "Understood.",
-        duration = 5;
-    })
-    return
-end
-
 loadstring(game:HttpGet("https://raw.githubusercontent.com/aabbaaii13/aabbaaii/refs/heads/main/PLSA.lua"))()
