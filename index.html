@@ -84,8 +84,44 @@
             window.addEventListener('resize', update);
         });
     </script>
+    <div id="user-count" style="position:fixed;bottom:20px;right:20px;padding:12px;background:var(--surface);border-radius:12px;border:1px solid var(--border-color);box-shadow:var(--glow);font-family:'General Sans',sans-serif;font-weight:500;color:var(--text);z-index:1000;display:flex;align-items:center;gap:8px;transition:all 0.3s ease;"></div>
+    <script>
+        async function updateCount(page) {
+            try {
+                const res = await fetch(`/api/pagecount?page=${page}`)
+                const data = await res.json()
+                document.getElementById('user-count').textContent = `${data.count} users online`
+                document.getElementById('user-count').style.display = 'flex'
+            } catch (e) {
+                document.getElementById('user-count').textContent = '0 users online'
+                document.getElementById('user-count').style.display = 'flex'
+            }
+        }
+
+        async function increment(page) {
+            try {
+                await fetch(`/api/pagecount?page=${page}&action=increment`, { method: 'POST' })
+           } catch (e) {}
+        }
+
+        async function decrement(page) {
+            try {
+                await fetch(`/api/pagecount?page=${page}&action=decrement`, { 
+                    method: 'POST',
+                    keepalive: true
+                })
+            } catch (e) {}
+        }
+
+        increment('home')
+        updateCount('home')
+        setInterval(() => updateCount('home'), 1000)
+
+        window.addEventListener('beforeunload', () => decrement('home'))
+    </script>
 </body>
 </html>
+
 
 
 
