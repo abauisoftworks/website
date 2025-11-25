@@ -1,8 +1,10 @@
 import { kv } from '@vercel/kv'
 
 export default async function handler(request, response) {
-    const { query } = request
-    const { page, action } = query
+    const url = new URL(request.url)
+    const params = new URLSearchParams(url.search)
+    const page = params.get('page')
+    const action = params.get('action')
 
     if (!page || !['home', 'scripts', 'executors'].includes(page)) {
         return response.status(400).json({ error: 'invalid page parameter' })
