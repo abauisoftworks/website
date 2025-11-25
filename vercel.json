@@ -7,12 +7,20 @@
         { "key": "Content-Type", "value": "text/plain; charset=utf-8" },
         { "key": "Content-Disposition", "value": "inline" }
       ]
+    },
+    {
+      "source": "/api/pagecount",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST" }
+      ]
     }
   ],
   "rewrites": [
     { "source": "/raw/(.*)", "destination": "/raw/$1.lua" },
     { "source": "/raw/(.*)", "destination": "/raw/$1.txt" },
     { "source": "/scripts", "destination": "/scripts.html" },
-    { "source": "/executors", "destination": "/executors.html" }
+    { "source": "/executors", "destination": "/executors.html" },
+    { "source": "/api/pagecount", "destination": "/api/pagecount.js" }
   ]
 }
