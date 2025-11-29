@@ -65,7 +65,7 @@ setthreadidentity(7)
 -- important notifications.
 game:GetService("StarterGui"):SetCore("SendNotification", {
   Title = "! IMPORTANT WARNING !",
-  Text = "This Script Is Alpha 1, May Contain Lot Of Bugs.",
+  Text = "This Script Is Alpha 2, May Contain Lot Of Bugs.",
   Duration = 15,
   Callback = nil,
   Button1 = "Understood."
