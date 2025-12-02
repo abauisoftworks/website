@@ -65,14 +65,14 @@ setthreadidentity(7)
 -- important notifications.
 game:GetService("StarterGui"):SetCore("SendNotification", {
   Title = "! IMPORTANT WARNING !",
-  Text = "This Script Is Alpha 2, May Contain Lot Of Bugs.",
+  Text = "This Script Is Alpha 3, May Contain Lot Of Bugs.",
   Duration = 15,
   Callback = nil,
   Button1 = "Understood."
 })
 game:GetService("StarterGui"):SetCore("SendNotification", {
   Title = "✓ HOW TO TOGGLE ✓",
-  Text = "Get A Keyboard Then Click F4 To Toggle It, Silent Aim Is Enabled Currently.",
+  Text = "Get A Keyboard Then Click F4 To Toggle It Or Click Green Button Top Left For Mobile, Silent Aim Is Enabled Currently.",
   Duration = 12.5,
   Callback = nil,
   Button1 = "Understood."
