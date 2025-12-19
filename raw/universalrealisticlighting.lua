@@ -1,0 +1,41 @@
+local lighting = game:GetService("Lighting")
+local tool = Instance.new("Tool", game:GetService("Players").LocalPlayer.Backpack)
+local part = Instance.new("Part", tool)
+local spotlight = Instance.new("SpotLight", part)
+tool.LevelOfDetail = "StreamingMesh"
+tool.ToolTip = "Light"
+tool.Name = "Light"
+tool.ModelStreamingMode = "Atomic"
+tool.RequiresHandle = true
+
+part.Material = "SmoothPlastic"
+part.Reflectance = 1
+part.Size = Vector3.new(1, 1, 1)
+part.CanCollide = false
+part.Name = "Handle"
+part.Anchored = false
+part.Massless = true
+part.Shape = "Ball"
+
+spotlight.Angle = 90
+spotlight.Brightness = 5
+spotlight.Color = Color3.fromRGB(255, 255, 255)
+spotlight.Face = "Front"
+spotlight.Range = 16
+spotlight.Shadows = true
+
+lighting.Ambient = Color3.fromRGB(0, 0, 0)
+lighting.Brightness = 3
+lighting.ColorShift_Bottom = Color3.fromRGB(0, 0, 0)
+lighting.ColorShift_Top = Color3.fromRGB(0, 0, 0)
+lighting.EnvironmentDiffuseScale = 1
+lighting.EnvironmentSpecularScale = 1
+lighting.GlobalShadows = true
+lighting.LightingStyle = "Realistic"
+lighting.OutdoorAmbient = Color3.fromRGB(0, 0, 0)
+lighting.Outlines = true
+lighting.PrioritizeLightingQuality = true
+lighting.ShadowColor = Color3.fromRGB(0, 0, 0)
+lighting.ShadowSoftness = 0.125
+lighting.Technology = "Future"
+lighting.ExposureCompensation = 0
