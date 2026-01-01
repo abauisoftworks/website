@@ -2,12 +2,8 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Abaui - Script Minifier</title>
-    <meta property="og:title" content="Abaui - Minifier">
-    <meta property="og:description" content="Professional Roblox Luau Minifier with premium Abaui design.">
-    <meta property="og:image" content="https://abaui.vercel.app/icons/abaui.png">
-    <link rel="icon" href="icons/abaui.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abaui - Minifier</title>
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=general-sans@500,600,700&f[]=clash-display@600,500&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -28,203 +24,159 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'General Sans', sans-serif; background: var(--bg-gradient); color: var(--text);
-            min-height: 100dvh; overflow: hidden; display: flex; flex-direction: column;
-        }
+        body { font-family: 'General Sans', sans-serif; background: var(--bg-gradient); color: var(--text); min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; }
 
-        .nav {
-            padding: 1.25rem 7%; display: flex; justify-content: space-between; align-items: center;
-            background: var(--nav-bg); backdrop-filter: blur(10px) saturate(180%);
-            border-bottom: 1px solid var(--border-color); z-index: 1000;
-        }
-        .logo {
-            font-family: 'Clash Display', sans-serif; font-size: 1.5rem; font-weight: 600;
-            background: var(--gradient); -webkit-background-clip: text; background-clip: text;
-            -webkit-text-fill-color: transparent; letter-spacing: -0.02em; transition: all 1s ease;
-        }
-
-        .main-container { flex: 1; padding: 2rem 7%; display: flex; flex-direction: column; gap: 1.5rem; min-height: 0; }
+        .nav { position: fixed; width: 100%; padding: 1.25rem 7%; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(10px) saturate(180%); z-index: 1000; border-bottom: 1px solid var(--border-color); top: 0; left: 0; }
+        .logo { font-family: 'Clash Display', sans-serif; font-size: 1.5rem; font-weight: 600; background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.02em; transition: all 1s ease; text-decoration: none; }
+        .nav-controls { display: flex; align-items: center; gap: 0.5rem; }
         
-        .mode-selector { display: flex; gap: 0.5rem; }
-        .pill-btn {
-            background: var(--surface); border: 1px solid var(--border-color); color: var(--text);
-            padding: 0.6rem 1.2rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;
-            cursor: pointer; transition: all 0.5s var(--transition); text-transform: uppercase;
-        }
-        .pill-btn.active { background: var(--gradient); color: white; border-color: transparent; box-shadow: var(--glow); }
+        .theme-toggle { background: none; border: none; padding: 0.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 9px; color: var(--text); transition: all 1s var(--transition); }
+        .theme-toggle svg { width: 18px; height: 18px; transition: all 1s var(--transition); }
+        .theme-toggle .moon { display: none; }
+        [data-theme="dark"] .theme-toggle .sun { display: none; }
+        [data-theme="dark"] .theme-toggle .moon { display: block; }
 
-        .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; flex: 1; min-height: 0; }
-        @media (max-width: 768px) { .editor-grid { grid-template-columns: 1fr; } }
+        .menu-toggle { display: flex; flex-direction: column; justify-content: center; align-items: center; background: none; border: none; width: 40px; height: 40px; cursor: pointer; z-index: 2050; }
+        .menu-toggle span { display: block; width: 30px; height: 2px; background: var(--text); margin: 4px 0; transition: 0.4s var(--transition); }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(9.5px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-9.5px) rotate(-45deg); }
 
-        .editor-card {
-            background: var(--surface); backdrop-filter: blur(20px); border-radius: 24px;
-            border: 1px solid var(--border-color); display: flex; flex-direction: column;
-            overflow: hidden; transition: all 0.5s var(--transition);
-        }
-        .editor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg), var(--glow); border-color: var(--accent); }
+        .nav-links { position: fixed; top: 0; right: 0; height: 100vh; background: var(--surface); backdrop-filter: blur(10px); padding: 5rem 2rem; min-width: 250px; flex-direction: column; gap: 1rem; transform: translateX(100%); transition: transform 0.3s var(--transition); display: flex; list-style: none; }
+        .nav-links.active { transform: translateX(0); }
+        .nav-links a { color: var(--text); text-decoration: none; font-size: 0.9rem; padding: 0.5rem 1rem; border-radius: 8px; transition: 0.3s; }
+        .nav-links a:hover { background: var(--hover-bg); color: var(--accent); }
+
+        .main-content { margin-top: 6rem; flex: 1; padding: 2rem 7%; display: flex; flex-direction: column; gap: 2rem; }
         
-        .card-header { 
-            padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color);
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .card-title { font-family: 'Clash Display'; font-size: 0.9rem; font-weight: 600; opacity: 0.6; }
+        .file-config { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: var(--surface); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border-color); }
+        .form-group input, .form-group select { padding: 0.75rem 1.25rem; border: 1px solid var(--border-color); border-radius: 12px; background: var(--secondary); color: var(--text); font-family: 'General Sans'; transition: 0.3s var(--transition); outline: none; }
+        .form-group input:focus { border-color: var(--accent); box-shadow: var(--glow); }
 
-        .action-btn {
-            padding: 0.6rem 1.2rem; background: var(--gradient); color: white; border: none;
-            border-radius: 10px; font-weight: 600; font-size: 0.75rem; cursor: pointer;
-            transition: all 0.4s var(--transition);
-        }
+        .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; min-height: 400px; }
+        @media (max-width: 900px) { .editor-grid { grid-template-columns: 1fr; } }
+
+        .card { background: var(--surface); border-radius: 20px; border: 1px solid var(--border-color); display: flex; flex-direction: column; overflow: hidden; transition: 0.5s var(--transition); }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: var(--glow); }
+        .card-header { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        
+        textarea { flex: 1; background: transparent; border: none; padding: 1.5rem; color: var(--text); font-family: monospace; font-size: 14px; resize: none; outline: none; min-height: 300px; }
+
+        .action-btn { padding: 0.8rem 1.5rem; background: var(--gradient); color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.4s var(--transition); }
         .action-btn:hover { background: var(--hover-gradient); transform: translateY(-2px); box-shadow: var(--glow); }
 
-        .text-area-wrapper { display: flex; flex: 1; min-height: 0; }
-        .gutter { 
-            width: 3.5rem; padding: 1.5rem 0; text-align: right; opacity: 0.2; 
-            border-right: 1px solid var(--border-color); font-family: monospace; font-size: 13px;
-        }
-        textarea {
-            flex: 1; background: transparent; border: none; outline: none; padding: 1.5rem;
-            color: var(--text); font-family: monospace; resize: none; font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .footer { padding: 1.5rem 7%; display: flex; justify-content: space-between; align-items: center; }
-        .footer-text { font-size: 0.75rem; opacity: 0.4; font-weight: 500; }
-
-        @keyframes heroFadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-up { animation: heroFadeUp 0.8s var(--transition) forwards; }
+        .footer { padding: 2rem 7%; text-align: center; opacity: 0.5; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
     <nav class="nav">
-        <div class="logo">Abaui</div>
+        <a href="#" class="logo">Abaui</a>
         <div class="nav-controls">
-            <span class="version-text" style="position:static; margin-right:10px; opacity:0.5; font-size:0.7rem">V1.3.0</span>
-            <button onclick="toggletheme()" class="theme-toggle">
-                <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+            <span class="version-text" style="font-size: 0.6rem; opacity: 0.5;">V1.3.0</span>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <svg class="sun" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                <svg class="moon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
             </button>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="https://abaui.vercel.app/">Home Page</a></li>
+                <li><a href="https://abaui.vercel.app/scripts">Our Scripts</a></li>
+                <li><a href="https://abaui.vercel.app/executors">Executors</a></li>
+                <li><a href="https://discord.gg/hnq9AGVMwq">Discord</a></li>
+            </ul>
         </div>
     </nav>
 
-    <main class="main-container animate-up">
-        <div class="mode-selector">
-            <button onclick="setmode('weak')" id="m-weak" class="pill-btn">Weak</button>
-            <button onclick="setmode('medium')" id="m-medium" class="pill-btn">Medium</button>
-            <button onclick="setmode('strong')" id="m-strong" class="pill-btn">Strong</button>
-            <button onclick="setmode('very-strong')" id="m-very-strong" class="pill-btn active">Very Strong</button>
+    <main class="main-content">
+        <div class="file-config">
+            <div class="form-group">
+                <input type="text" id="filename" placeholder="File name..." value="script">
+            </div>
+            <div class="form-group">
+                <select id="extension">
+                    <option value=".luau">.luau</option>
+                    <option value=".lua">.lua</option>
+                    <option value=".txt">.txt</option>
+                </select>
+            </div>
+            <div style="flex:1"></div>
+            <button class="action-btn" onclick="setMode('very-strong')">Very Strong</button>
         </div>
 
         <div class="editor-grid">
-            <div class="editor-card">
+            <div class="card">
                 <div class="card-header">
-                    <span class="card-title">RAW LUAU</span>
-                    <button onclick="dopaste()" class="action-btn">Paste</button>
+                    <span style="font-family:'Clash Display'; font-weight:600; opacity:0.5">INPUT</span>
+                    <button class="action-btn" style="padding:0.5rem 1rem" onclick="doPaste()">Paste</button>
                 </div>
-                <div class="text-area-wrapper">
-                    <div id="gutter-in" class="gutter">1</div>
-                    <textarea id="input" spellcheck="false" placeholder="-- Paste your script here..."></textarea>
-                </div>
+                <textarea id="input" placeholder="-- Paste script here..."></textarea>
             </div>
-
-            <div class="editor-card">
+            <div class="card">
                 <div class="card-header">
-                    <span class="card-title">MINIFIED</span>
-                    <button onclick="docopy()" id="copy-btn" class="action-btn">Copy</button>
+                    <span style="font-family:'Clash Display'; font-weight:600; opacity:0.5">OUTPUT</span>
+                    <button class="action-btn" id="copy-btn" style="padding:0.5rem 1rem" onclick="doCopy()">Copy</button>
                 </div>
-                <div class="text-area-wrapper">
-                    <div id="gutter-out" class="gutter">1</div>
-                    <textarea id="output" readonly spellcheck="false"></textarea>
-                </div>
+                <textarea id="output" readonly></textarea>
             </div>
         </div>
+
+        <button class="action-btn" style="width:100%; padding:1.2rem" onclick="doDownload()">Download Minified File</button>
     </main>
 
     <footer class="footer">
-        <span class="footer-text">No logs stored locally. Use a VPN for total anonymity.</span>
-        <button onclick="dodownload()" class="action-btn">Download .luau</button>
+        No logs stored locally. External logging via ISP or Host may occur. Use a VPN for total anonymity.
     </footer>
 
-<script>
-    let mode = 'very-strong';
-    const elin = document.getElementById('input'), elout = document.getElementById('output');
-
-    function toggletheme() { 
-        document.documentElement.setAttribute('data-theme', 
-            document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
-        );
-    }
-
-    function setmode(m) { 
-        mode = m; 
-        document.querySelectorAll('.pill-btn').forEach(b => b.classList.toggle('active', b.id === 'm-' + m)); 
-        process(); 
-    }
-
-    function syncgutter(el, gid) {
-        const lines = el.value.split('\n').length;
-        let h = ''; for (let i = 1; i <= lines; i++) h += i + '\n';
-        const g = document.getElementById(gid);
-        g.innerText = h; g.scrollTop = el.scrollTop;
-    }
-
-    function process() {
-        let c = elin.value;
-        if (!c) { elout.value = ""; syncgutter(elin, 'gutter-in'); syncgutter(elout, 'gutter-out'); return; }
-        
-        c = c.replace(/--\[(=*)\[[\s\S]*?\]\1\]/g, '').replace(/\s*--.*$/gm, '').replace(/^\s*[\r\n]/gm, '');
-        
-        if (['medium', 'strong', 'very-strong'].includes(mode)) {
-            c = c.replace(/\s*([=+*/%^#<>~])\s*/g, '$1');
-        }
-        
-        if (['strong', 'very-strong'].includes(mode)) {
-            c = c.replace(/\b([a-zA-Z_]\w*)\s*\(\s*(["'])(.*?)\2\s*\)/g, (m, f, q, content) => 
-                (!content.includes('\\') && !content.includes('\n')) ? `${f}'${content}'` : m);
-            c = c.replace(/\s+/g, ' ').replace(/\s*([=+\-*/%^#<>~;:,{}()\[\]])\s*/g, '$1').trim();
+    <script>
+        function toggleTheme() {
+            const curr = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', curr === 'dark' ? 'light' : 'dark');
         }
 
-        if (mode === 'very-strong') {
-            let cnt = 0, map = {};
-            c = c.replace(/\blocal\s+([a-zA-Z_]\w*)/g, (m, n) => {
-                if (["_G", "shared", "script", "game", "workspace"].includes(n)) return m;
-                if (!map[n]) {
-                    const chars = 'abcdefghijklmnopqrstuvwxyz';
-                    let r = '', i = cnt++;
-                    while (i >= 0) { r = chars[i % 26] + r; i = Math.floor(i / 26) - 1; }
-                    map[n] = r;
-                }
-                return `local ${map[n]}`;
+        function toggleMenu() {
+            document.querySelector('.menu-toggle').classList.toggle('active');
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        function doPaste() {
+            navigator.clipboard.readText().then(text => {
+                document.getElementById('input').value = text;
+                process();
             });
         }
-        
-        elout.value = c;
-        syncgutter(elin, 'gutter-in'); 
-        syncgutter(elout, 'gutter-out');
-    }
 
-    async function dopaste() { try { elin.value = await navigator.clipboard.readText(); process(); } catch(e) {} }
-    
-    function docopy() { 
-        navigator.clipboard.writeText(elout.value); 
-        const b = document.getElementById('copy-btn');
-        const old = b.innerText; b.innerText = "Copied!"; 
-        setTimeout(() => b.innerText = old, 1000); 
-    }
+        function doCopy() {
+            const out = document.getElementById('output');
+            navigator.clipboard.writeText(out.value);
+            const btn = document.getElementById('copy-btn');
+            btn.innerText = "Done!";
+            setTimeout(() => btn.innerText = "Copy", 1000);
+        }
 
-    function dodownload() {
-        if(!elout.value) return;
-        const blob = new Blob([elout.value], {type: 'text/plain'});
-        const a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = "minified_" + Date.now() + ".luau";
-        a.click();
-    }
+        function process() {
+            let c = document.getElementById('input').value;
+            // Minification logic
+            c = c.replace(/--\[(=*)\[[\s\S]*?\]\1\]/g, '').replace(/\s*--.*$/gm, '').replace(/^\s*[\r\n]/gm, '');
+            c = c.replace(/\s+/g, ' ').trim();
+            document.getElementById('output').value = c;
+        }
 
-    elin.oninput = process;
-    elin.onscroll = () => syncgutter(elin, 'gutter-in');
-    elout.onscroll = () => syncgutter(elout, 'gutter-out');
-</script>
+        function doDownload() {
+            const content = document.getElementById('output').value;
+            if(!content) return;
+            const name = document.getElementById('filename').value || 'script';
+            const ext = document.getElementById('extension').value;
+            const blob = new Blob([content], {type: 'text/plain'});
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = name + ext;
+            a.click();
+        }
+
+        document.getElementById('input').oninput = process;
+    </script>
 </body>
 </html>
