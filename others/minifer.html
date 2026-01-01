@@ -3,194 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Abaui - Minifer</title>
+    <title>Abaui - Scripts</title>
     <meta property="og:title" content="Abaui - Scripts">
     <meta property="og:description" content="New Roblox Website For Exploiters. We Have a Our Scripts, (Not Ours) Executors, Community Scripts And Maybe More.">
     <meta property="og:image" content="https://abaui.vercel.app/icons/abaui.png">
     <meta property="og:url" content="https://abaui-community.vercel.app">
     <meta property="og:type" content="website">
     <link rel="icon" href="icons/abaui.png" type="image/png">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=general-sans@500,600,700&f[]=clash-display@600,500&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500&f[]=clash-display@600&f[]=space-mono@400&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --bg: #0a0a0a; --card: #141414; --text: #ffffff; --border: #262626;
-            --accent: #3b82f6; --grad: linear-gradient(135deg, #3b82f6, #2563eb);
-        }
-        [data-theme="light"] {
-            --bg: #ffffff; --card: #f5f5f5; --text: #000000; --border: #d4d4d4;
-        }
+        :root { --accent: #3b82f6; --t: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        body { margin: 0; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; transition: background var(--t), color var(--t); }
 
-        body { 
-            background: var(--bg); color: var(--text); font-family: 'Satoshi', sans-serif; 
-            height: 100dvh; display: flex; flex-direction: column; margin: 0; overflow: hidden;
-        }
-      
-        [data-style="default"] body { background: var(--bg); }
-        [data-style="default"] .minifier-card { 
-            background: var(--card); border: 2px solid var(--border); border-radius: 0px; 
-            box-shadow: 4px 4px 0px var(--border); 
-        }
-        [data-style="default"] .pill-btn { background: var(--card); border: 1px solid var(--border); border-radius: 0px; font-weight: 800; }
-        [data-style="default"] .pill-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
-        [data-style="default"] .icon-btn { border-radius: 0px; border: 2px solid var(--border); background: var(--card); }
-        [data-style="default"] .action-btn { border-radius: 0px; background: var(--text); color: var(--bg); font-weight: 900; }
-        [data-style="default"] .logo-text { font-family: sans-serif; font-weight: 900; text-transform: uppercase; }
+        [data-style="abaui"] body { background: radial-gradient(at top left, #1e1b4b, #020617); color: #f8fafc; font-family: 'Satoshi', sans-serif; }
+        [data-style="abaui"] .minifier-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 32px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
+        [data-style="abaui"] .pill-btn { border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid transparent; }
+        [data-style="abaui"] .pill-btn.active { background: #fff; color: #000; transform: scale(1.05); font-weight: 700; }
+        [data-style="abaui"] .action-btn { background: linear-gradient(135deg, #38bdf8, #818cf8); border-radius: 14px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); }
+        [data-style="abaui"] .social-link { background: rgba(255,255,255,0.03); padding: 0.5rem 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
+        [data-style="abaui"] .social-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); border-color: #38bdf8; }
+        [data-style="abaui"] .logo { font-family: 'Clash Display'; }
 
-        [data-style="abaui"] body { background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #020617 100%); transition: background 0.5s ease; }
-        [data-style="abaui"] .minifier-card { 
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); 
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-        [data-style="abaui"] .pill-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; }
-        [data-style="abaui"] .pill-btn.active { background: #fff; color: #000; border: none; }
-        [data-style="abaui"] .icon-btn { border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-        [data-style="abaui"] .action-btn { background: linear-gradient(135deg, #38bdf8, #818cf8); border-radius: 10px; }
-        [data-style="abaui"] .logo-text { font-family: 'Clash Display'; font-weight: 600; }
+        [data-style="default"] body { background: #000; color: #fff; font-family: 'Space Mono', monospace; }
+        [data-style="default"] .minifier-card { background: #000; border: 3px solid #fff; border-radius: 0px; box-shadow: 8px 8px 0px #333; }
+        [data-style="default"] .pill-btn { border-radius: 0px; border: 2px solid #333; background: #000; }
+        [data-style="default"] .pill-btn.active { background: #fff; color: #000; border-color: #fff; }
+        [data-style="default"] .action-btn { background: #fff; color: #000; border-radius: 0px; font-weight: 900; }
+        [data-style="default"] .social-link { border: 2px solid #333; padding: 0.4rem 0.8rem; font-weight: 900; }
+        [data-style="default"] .social-link:hover { background: #fff; color: #000; }
+        [data-style="default"] .logo { font-weight: 900; text-transform: uppercase; }
 
-        .app-container { display: flex; flex-direction: column; height: 100%; padding: 1.5rem; gap: 1.25rem; }
-        .main-grid { display: flex; flex: 1; gap: 1.25rem; min-height: 0; flex-direction: row; }
-        @media (max-aspect-ratio: 1/1), (max-width: 800px) { .main-grid { flex-direction: column; } }
-
-        .minifier-card { display: flex; flex-direction: column; flex: 1; min-height: 0; transition: all 0.3s ease; }
-        .editor-wrap { position: relative; display: flex; flex: 1; min-height: 0; font-family: 'ui-monospace', monospace; font-size: 13px; }
-        .line-gutter { padding: 1rem 0; text-align: right; min-width: 3.5rem; opacity: 0.2; border-right: 1px solid var(--border); overflow: hidden; }
-        textarea { flex: 1; background: transparent; border: none; outline: none; padding: 1rem; color: inherit; resize: none; white-space: pre; overflow: auto; }
-
-        .action-btn { padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; transition: 0.2s; }
-        .ext-btn { cursor: pointer; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.65rem; font-weight: 800; opacity: 0.4; transition: 0.2s; }
-        .ext-btn.active { background: #fff; color: #000; opacity: 1; }
-        
-        svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+        .app-shell { display: flex; flex-direction: column; height: 100%; padding: clamp(1rem, 3vw, 2.5rem); gap: 1.5rem; }
+        .editor-grid { display: flex; flex: 1; gap: 1.5rem; min-height: 0; }
+        @media (max-aspect-ratio: 1/1) { .editor-grid { flex-direction: column; } }
+        .editor-container { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+        .text-box { position: relative; display: flex; flex: 1; min-height: 0; font-size: 14px; }
+        textarea { flex: 1; background: transparent; border: none; outline: none; padding: 1.5rem; color: inherit; resize: none; white-space: pre; overflow: auto; }
+        .gutter { padding: 1.5rem 0; text-align: right; min-width: 3.5rem; opacity: 0.2; border-right: 1px solid currentColor; overflow: hidden; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
+        svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.5; }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <header class="flex justify-between items-center">
-            <h1 class="logo-text text-3xl">Abaui</h1>
-            <div class="flex gap-3">
-                <button onclick="toggleTheme()" class="icon-btn w-10 h-10 flex items-center justify-center">
-                    <svg><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-                </button>
-                <button onclick="toggleStyle()" class="icon-btn w-10 h-10 flex items-center justify-center">
-                    <svg><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 12h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg>
-                </button>
-                <button onclick="reset()" class="icon-btn w-10 h-10 flex items-center justify-center text-red-500">
-                    <svg><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                </button>
-            </div>
-        </header>
-
-        <div class="flex gap-2 overflow-x-auto no-scrollbar">
-            <button onclick="setMode('weak')" id="m-weak" class="pill-btn px-4 py-2 text-[0.7rem]">WEAK</button>
-            <button onclick="setMode('medium')" id="m-medium" class="pill-btn px-4 py-2 text-[0.7rem]">MEDIUM</button>
-            <button onclick="setMode('strong')" id="m-strong" class="pill-btn px-4 py-2 text-[0.7rem]">STRONG</button>
-            <button onclick="setMode('very-strong')" id="m-very-strong" class="pill-btn active px-4 py-2 text-[0.7rem]">VERY STRONG</button>
+<div class="app-shell">
+    <header class="flex justify-between items-center">
+        <h1 class="logo text-3xl sm:text-4xl font-bold tracking-tighter">ABAUI</h1>
+        <div class="flex gap-3">
+            <button onclick="toggletheme()" class="w-10 h-10 flex items-center justify-center pill-btn"><svg><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+            <button onclick="togglestyle()" class="w-10 h-10 flex items-center justify-center pill-btn"><svg><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg></button>
+            <button onclick="reset()" class="w-10 h-10 flex items-center justify-center pill-btn text-red-500"><svg><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
         </div>
+    </header>
 
-        <main class="main-grid">
-            <div class="minifier-card overflow-hidden">
-                <div class="flex justify-between items-center p-4 border-b border-white/5">
-                    <span class="text-[0.6rem] font-bold opacity-30 uppercase">Raw Input</span>
-                    <button onclick="doPaste()" class="action-btn">Paste</button>
-                </div>
-                <div class="editor-wrap">
-                    <div id="gutter-in" class="line-gutter">1</div>
-                    <textarea id="input" spellcheck="false" wrap="off"></textarea>
-                </div>
-            </div>
-
-            <div class="minifier-card overflow-hidden">
-                <div class="flex justify-between items-center p-4 border-b border-white/5">
-                    <span class="text-[0.6rem] font-bold opacity-30 uppercase">Output</span>
-                    <button onclick="doCopy()" id="copy-btn" class="action-btn">Copy</button>
-                </div>
-                <div class="editor-wrap">
-                    <div id="gutter-out" class="line-gutter">1</div>
-                    <textarea id="output" readonly wrap="off" spellcheck="false"></textarea>
-                </div>
-            </div>
-        </main>
-
-        <footer class="flex flex-wrap justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <div class="flex bg-black/40 p-1.5 rounded-xl border border-white/5">
-                    <div class="ext-btn active" onclick="selExt(this, '.luau')">.LUAU</div>
-                    <div class="ext-btn" onclick="selExt(this, '.lua')">.LUA</div>
-                    <div class="ext-btn" onclick="selExt(this, '.txt')">.TXT</div>
-                </div>
-                <button onclick="doDownload()" class="action-btn px-8 py-2.5">Download</button>
-            </div>
-            <p class="text-[0.6rem] opacity-20 text-right leading-tight max-w-[250px]">
-                No logs. ISP/Vercel activity possible. VPN recommended.
-            </p>
-        </footer>
+    <div class="flex gap-2 overflow-x-auto no-scrollbar">
+        <button onclick="setmode('weak')" id="m-weak" class="pill-btn px-5 py-2 text-[10px] font-bold uppercase">Weak</button>
+        <button onclick="setmode('medium')" id="m-medium" class="pill-btn px-5 py-2 text-[10px] font-bold uppercase">Medium</button>
+        <button onclick="setmode('strong')" id="m-strong" class="pill-btn px-5 py-2 text-[10px] font-bold uppercase">Strong</button>
+        <button onclick="setmode('very-strong')" id="m-very-strong" class="pill-btn active px-5 py-2 text-[10px] font-bold uppercase">Very Strong</button>
     </div>
 
-    <script>
-        let mode = 'very-strong', selectedExt = '.luau';
-        const elIn = document.getElementById('input'), elOut = document.getElementById('output');
+    <main class="editor-grid">
+        <section class="minifier-card editor-container overflow-hidden">
+            <div class="flex justify-between items-center p-4 border-b border-white/5">
+                <span class="text-[10px] font-bold opacity-30 uppercase tracking-widest">Input</span>
+                <button onclick="dopaste()" class="action-btn px-4 py-1.5 text-xs font-bold">Paste</button>
+            </div>
+            <div class="text-box">
+                <div id="gutter-in" class="gutter">1</div>
+                <textarea id="input" spellcheck="false" wrap="off"></textarea>
+            </div>
+        </section>
 
-        function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
-        function toggleStyle() { 
-            const s = document.documentElement.getAttribute('data-style') === 'abaui' ? 'default' : 'abaui';
-            document.documentElement.setAttribute('data-style', s);
+        <section class="minifier-card editor-container overflow-hidden">
+            <div class="flex justify-between items-center p-4 border-b border-white/5">
+                <span class="text-[10px] font-bold opacity-30 uppercase tracking-widest">Minified</span>
+                <button onclick="docopy()" id="copy-btn" class="action-btn px-4 py-1.5 text-xs font-bold">Copy</button>
+            </div>
+            <div class="text-box">
+                <div id="gutter-out" class="gutter">1</div>
+                <textarea id="output" readonly wrap="off" spellcheck="false"></textarea>
+            </div>
+        </section>
+    </main>
+
+    <footer class="flex flex-col gap-6">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <div class="flex gap-3">
+                <a href="https://github.com/aabbaaii13" target="_blank" class="social-link text-[11px] font-bold">GITHUB</a>
+                <a href="https://www.tiktok.com/@abauicommunity" target="_blank" class="social-link text-[11px] font-bold">TIKTOK</a>
+                <a href="https://discord.gg/hnq9AGVMwq" target="_blank" class="social-link text-[11px] font-bold">DISCORD</a>
+            </div>
+            <button onclick="dodownload()" class="action-btn px-8 py-3 text-xs font-black">Download File</button>
+        </div>
+        <p class="text-[9px] opacity-20 text-center sm:text-right font-bold tracking-widest uppercase">Privacy Guaranteed. No logs stored.</p>
+    </footer>
+</div>
+
+<script>
+    let mode = 'very-strong';
+    const elin = document.getElementById('input'), elout = document.getElementById('output');
+    function toggletheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+    function togglestyle() { document.documentElement.setAttribute('data-style', document.documentElement.getAttribute('data-style') === 'abaui' ? 'default' : 'abaui'); }
+    function setmode(m) { mode = m; document.querySelectorAll('.pill-btn').forEach(b => b.classList.toggle('active', b.id === 'm-' + m)); process(); }
+    function syncgutter(el, gid) {
+        const lines = el.value.split('\n').length;
+        let h = ''; for (let i = 1; i <= lines; i++) h += i + '\n';
+        const g = document.getElementById(gid);
+        g.innerText = h; g.scrollTop = el.scrollTop;
+    }
+    function process() {
+        let c = elin.value;
+        if (!c) { elout.value = ""; syncgutter(elin, 'gutter-in'); syncgutter(elout, 'gutter-out'); return; }
+        c = c.replace(/--\[(=*)\[[\s\S]*?\]\1\]/g, '').replace(/\s*--.*$/gm, '').replace(/^\s*[\r\n]/gm, '');
+        if (['medium', 'strong', 'very-strong'].includes(mode)) c = c.replace(/\s*([=+*/%^#<>~])\s*/g, '$1');
+        if (['strong', 'very-strong'].includes(mode)) {
+            c = c.replace(/\b([a-zA-Z_]\w*)\s*\(\s*(["'])(.*?)\2\s*\)/g, (m, f, q, content) => (!content.includes('\\') && !content.includes('\n')) ? `${f}'${content}'` : m);
+            c = c.replace(/\s+/g, ' ').replace(/\s*([=+\-*/%^#<>~;:,{}()\[\]])\s*/g, '$1').trim();
         }
-        function selExt(el, ext) { document.querySelectorAll('.ext-btn').forEach(d => d.classList.remove('active')); el.classList.add('active'); selectedExt = ext; }
-        function setMode(m) { mode = m; document.querySelectorAll('.pill-btn').forEach(b => b.classList.toggle('active', b.id === 'm-' + m)); process(); }
-
-        function syncGutter(el, gid) {
-            const lines = el.value.split('\n').length;
-            let h = ''; for (let i = 1; i <= lines; i++) h += i + '\n';
-            const g = document.getElementById(gid);
-            g.innerText = h; g.scrollTop = el.scrollTop;
+        if (mode === 'very-strong') {
+            let cnt = 0, map = {};
+            c = c.replace(/\blocal\s+([a-zA-Z_]\w*)/g, (m, n) => {
+                if (["_G", "shared", "script", "game", "workspace"].includes(n)) return m;
+                if (!map[n]) {
+                    const chars = 'abcdefghijklmnopqrstuvwxyz';
+                    let r = '', i = cnt++;
+                    while (i >= 0) { r = chars[i % 26] + r; i = Math.floor(i / 26) - 1; }
+                    map[n] = r;
+                }
+                return `local ${map[n]}`;
+            });
         }
-
-        function process() {
-            let c = elIn.value;
-            if (!c) { elOut.value = ""; syncGutter(elIn, 'gutter-in'); syncGutter(elOut, 'gutter-out'); return; }
-            c = c.replace(/--\[(=*)\[[\s\S]*?\]\1\]/g, '').replace(/\s*--.*$/gm, '');
-            if (mode !== 'comments') c = c.replace(/^\s*[\r\n]/gm, '');
-            if (['medium', 'strong', 'very-strong'].includes(mode)) c = c.replace(/\s*([=+*/%^#<>~])\s*/g, '$1');
-            if (['strong', 'very-strong'].includes(mode)) {
-                c = c.replace(/\b([a-zA-Z_]\w*)\s*\(\s*(["'])(.*?)\2\s*\)/g, (m, f, q, content) => (!content.includes('\\') && !content.includes('\n')) ? `${f}'${content}'` : m);
-                c = c.replace(/\s+/g, ' ').replace(/\s*([=+\-*/%^#<>~;:,{}()\[\]])\s*/g, '$1').trim();
-            }
-            if (mode === 'very-strong') {
-                let cnt = 0, map = {};
-                c = c.replace(/\blocal\s+([a-zA-Z_]\w*)/g, (m, n) => {
-                    if (["_G", "shared", "script", "game", "workspace"].includes(n)) return m;
-                    if (!map[n]) {
-                        const chars = 'abcdefghijklmnopqrstuvwxyz';
-                        let r = '', i = cnt++;
-                        while (i >= 0) { r = chars[i % 26] + r; i = Math.floor(i / 26) - 1; }
-                        map[n] = r;
-                    }
-                    return `local ${map[n]}`;
-                });
-            }
-            elOut.value = c;
-            syncGutter(elIn, 'gutter-in'); syncGutter(elOut, 'gutter-out');
-        }
-
-        async function doPaste() { try { elIn.value = await navigator.clipboard.readText(); process(); } catch(e) {} }
-        function doCopy() { navigator.clipboard.writeText(elOut.value); document.getElementById('copy-btn').innerText = "DONE"; setTimeout(() => document.getElementById('copy-btn').innerText = "COPY", 1000); }
-        function reset() { elIn.value = ""; process(); }
-        function doDownload() {
-            if(!elOut.value) return;
-            const blob = new Blob([elOut.value], {type: 'text/plain'});
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = "minified_" + Date.now() + selectedExt;
-            a.click();
-        }
-
-        elIn.oninput = process;
-        elIn.onscroll = () => syncGutter(elIn, 'gutter-in');
-        elOut.onscroll = () => syncGutter(elOut, 'gutter-out');
-    </script>
+        elout.value = c;
+        syncgutter(elin, 'gutter-in'); syncgutter(elout, 'gutter-out');
+    }
+    async function dopaste() { try { elin.value = await navigator.clipboard.readText(); process(); } catch(e) {} }
+    function docopy() { navigator.clipboard.writeText(elout.value); document.getElementById('copy-btn').innerText = "DONE"; setTimeout(() => document.getElementById('copy-btn').innerText = "COPY", 1000); }
+    function reset() { elin.value = ""; process(); }
+    function dodownload() {
+        if(!elout.value) return;
+        const blob = new Blob([elout.value], {type: 'text/plain'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = "minified_" + Date.now() + ".luau";
+        a.click();
+    }
+    elin.oninput = process;
+    elin.onscroll = () => syncgutter(elin, 'gutter-in');
+    elout.onscroll = () => syncgutter(elout, 'gutter-out');
+</script>
 </body>
 </html>
