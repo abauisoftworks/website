@@ -9,73 +9,55 @@
     <style>
         :root {
             --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --border: #e2e8f0;
-            --accent: #0ea5e9; --btn-bg: #ffffff; --btn-text: #0f172a;
-            --glass: rgba(255, 255, 255, 0.7); --grad: linear-gradient(135deg, #0ea5e9, #6366f1);
+            --accent: #0ea5e9; --btn-bg: #ffffff; --grad: linear-gradient(135deg, #0ea5e9, #6366f1);
         }
         [data-theme="dark"] {
             --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --border: #334155;
-            --accent: #38bdf8; --btn-bg: #1e293b; --btn-text: #f8fafc;
-            --glass: rgba(15, 23, 42, 0.7); --grad: linear-gradient(135deg, #38bdf8, #818cf8);
+            --accent: #38bdf8; --btn-bg: #1e293b; --grad: linear-gradient(135deg, #38bdf8, #818cf8);
         }
 
-        body { background: var(--bg); color: var(--text); font-family: 'General Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; transition: 0.2s; overflow-x: hidden; }
+        body { background: var(--bg); color: var(--text); font-family: 'General Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; transition: 0.2s; }
 
-        /* Style Logic */
-        [data-style="default"] body { background: var(--bg) !important; }
-        [data-style="default"] .minifier-card { background: var(--card) !important; border: 1px solid var(--border) !important; border-radius: 4px; box-shadow: none; backdrop-filter: none; }
-        [data-style="default"] .pill-btn { background: var(--btn-bg); border: 1px solid var(--border); border-radius: 4px; color: var(--text); }
-        [data-style="default"] .pill-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-        [data-style="default"] .action-btn { background: var(--accent); color: #fff; border-radius: 4px; }
-
-        [data-style="abaui"] body { background: linear-gradient(135deg, var(--bg), var(--card)) !important; }
-        [data-style="abaui"] .minifier-card { background: var(--glass) !important; backdrop-filter: blur(20px) saturate(180%); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        [data-style="abaui"] .pill-btn { background: var(--glass); border: 1px solid var(--border); border-radius: 12px; }
+        [data-style="default"] .minifier-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; }
+        [data-style="default"] .pill-btn { background: var(--btn-bg); border: 1px solid var(--border); border-radius: 4px; }
+        [data-style="default"] .pill-btn.active { background: var(--accent); color: #fff; }
+        
+        [data-style="abaui"] .minifier-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; }
+        [data-style="abaui"] .pill-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 12px; }
         [data-style="abaui"] .pill-btn.active { background: var(--grad); color: #fff; border: none; }
-        [data-style="abaui"] .action-btn { background: var(--grad); border-radius: 10px; }
+        [data-style="abaui"] .logo-text { font-family: 'Clash Display'; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .editor-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; height: 50vh; padding: 0 1rem; }
+        .editor-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; height: 55vh; padding: 0 1rem; }
         @media (max-width: 1024px) { .editor-container { grid-template-columns: 1fr; height: auto; } .minifier-card { height: 400px; } }
 
-        /* Fixed Gutter Alignment */
-        .editor-wrap { position: relative; display: flex; flex: 1; overflow: hidden; border-radius: inherit; }
-        .line-gutter { 
-            font-family: 'ui-monospace', monospace; font-size: 13px; line-height: 20px; 
-            padding: 20px 0; text-align: right; min-width: 45px; opacity: 0.3; 
-            border-right: 1px solid var(--border); user-select: none; pointer-events: none; 
-            background: transparent; overflow: hidden; white-space: pre;
-        }
-        textarea { 
-            flex: 1; background: transparent; border: none; outline: none; padding: 20px; 
-            font-family: 'ui-monospace', monospace; font-size: 13px; line-height: 20px; 
-            color: var(--text); resize: none; tab-size: 4; white-space: pre; overflow: auto;
-        }
+        .editor-wrap { position: relative; display: flex; flex: 1; overflow: hidden; font-family: 'ui-monospace', monospace; font-size: 13px; line-height: 20px; }
+        .line-gutter { padding: 20px 0; text-align: right; min-width: 50px; opacity: 0.2; border-right: 1px solid var(--border); user-select: none; pointer-events: none; white-space: pre; overflow: hidden; }
+        textarea { flex: 1; background: transparent; border: none; outline: none; padding: 20px; color: var(--text); resize: none; tab-size: 4; white-space: pre; overflow: auto; }
 
-        .pill-btn { padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 600; transition: 0.2s; white-space: nowrap; }
-        .action-btn { color: white; padding: 0.5rem 1.25rem; font-size: 0.75rem; font-weight: 600; }
-        .stat-bar { padding: 0.75rem 1.5rem; font-size: 0.65rem; font-weight: 700; display: flex; gap: 1rem; border-top: 1px solid var(--border); opacity: 0.7; }
-        .impressed { color: #10b981; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0.4; } }
+        .pill-btn { padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 600; transition: 0.2s; }
+        .action-btn { background: var(--grad); color: white; padding: 0.5rem 1.25rem; border-radius: 8px; font-size: 0.75rem; font-weight: 600; }
+        .stat-bar { padding: 0.75rem 1.5rem; font-size: 0.65rem; font-weight: 700; display: flex; gap: 1rem; border-top: 1px solid var(--border); opacity: 0.6; }
+
+        .download-bar { display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem; margin-top: 1rem; padding: 0 1rem; }
+        .download-select { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem; font-size: 0.75rem; color: var(--text); outline: none; }
         
-        .site-footer { 
-            margin-top: auto; padding: 2rem; text-align: center; opacity: 0.7; 
-            font-size: 0.8rem; border-top: 1px solid var(--border); line-height: 1.6;
-        }
-        .site-footer b { color: var(--accent); }
+        .site-footer { margin-top: auto; padding: 2rem; text-align: center; opacity: 0.7; font-size: 0.8rem; border-top: 1px solid var(--border); line-height: 1.6; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
     <div class="max-w-[1400px] mx-auto w-full">
-        <nav class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+        <nav class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
             <h1 class="logo-text text-3xl font-bold tracking-tight">Luau Minifier</h1>
             <div class="flex gap-3">
-                <button onclick="toggleTheme()" class="pill-btn">Theme: <span id="theme-label">Dark</span></button>
-                <button onclick="toggleStyle()" class="pill-btn">Style: <span id="style-label">Abaui</span></button>
+                <button onclick="toggleTheme()" class="pill-btn">Theme</button>
+                <button onclick="toggleStyle()" class="pill-btn">Style</button>
                 <button onclick="reset()" class="pill-btn text-red-500">Reset</button>
             </div>
         </nav>
 
-        <div class="flex overflow-x-auto gap-2 mb-8 pb-2 no-scrollbar">
+        <div class="flex overflow-x-auto gap-2 mb-6 pb-2 no-scrollbar">
             <button onclick="setMode('comments')" id="m-comments" class="pill-btn">Comments</button>
             <button onclick="setMode('lines')" id="m-lines" class="pill-btn">Lines</button>
             <button onclick="setMode('weak')" id="m-weak" class="pill-btn">Weak</button>
@@ -85,31 +67,39 @@
         </div>
 
         <div class="editor-container">
-            <div class="minifier-card flex flex-col">
-                <div class="flex justify-between items-center px-6 py-4 border-b border-[var(--border)]">
-                    <span class="text-[0.7rem] font-bold uppercase opacity-50">Input</span>
+            <div class="minifier-card flex flex-col overflow-hidden">
+                <div class="flex justify-between items-center px-6 py-3 border-b border-[var(--border)]">
+                    <span class="text-[0.6rem] font-bold uppercase opacity-40">Input</span>
                     <button onclick="doPaste()" class="action-btn">Paste</button>
                 </div>
                 <div class="editor-wrap">
                     <div id="gutter-in" class="line-gutter">1</div>
-                    <textarea id="input" spellcheck="false" wrap="off" placeholder="-- Luau script..."></textarea>
+                    <textarea id="input" spellcheck="false" wrap="off" placeholder="-- Paste code..."></textarea>
                 </div>
-                <div class="stat-bar" id="stat-in">
-                    <span id="in-lines">Lines: 0</span> <span id="in-size">Size: 0 B</span>
-                </div>
+                <div class="stat-bar" id="stat-in"><span id="in-lines">Lines: 0</span> <span id="in-size">Size: 0 B</span></div>
             </div>
 
-            <div class="minifier-card flex flex-col">
-                <div class="flex justify-between items-center px-6 py-4 border-b border-[var(--border)]">
-                    <span class="text-[0.7rem] font-bold uppercase opacity-50">Result</span>
-                    <button onclick="doCopy()" id="copy-btn" class="action-btn">Copy</button>
+            <div class="flex flex-col">
+                <div class="minifier-card flex flex-col overflow-hidden flex-1">
+                    <div class="flex justify-between items-center px-6 py-3 border-b border-[var(--border)]">
+                        <span class="text-[0.6rem] font-bold uppercase opacity-40">Result</span>
+                        <button onclick="doCopy()" id="copy-btn" class="action-btn">Copy</button>
+                    </div>
+                    <div class="editor-wrap">
+                        <div id="gutter-out" class="line-gutter">1</div>
+                        <textarea id="output" readonly wrap="off" spellcheck="false"></textarea>
+                    </div>
+                    <div class="stat-bar" id="stat-out"><span id="out-lines">Lines: 0</span> <span id="out-size">Size: 0 B</span></div>
                 </div>
-                <div class="editor-wrap">
-                    <div id="gutter-out" class="line-gutter">1</div>
-                    <textarea id="output" readonly wrap="off" spellcheck="false"></textarea>
-                </div>
-                <div class="stat-bar" id="stat-out">
-                    <span id="out-lines">Lines: 0</span> <span id="out-size">Size: 0 B</span>
+                
+                <div class="download-bar">
+                    <span class="text-[0.7rem] font-bold opacity-50">EXPORT:</span>
+                    <select id="ext" class="download-select">
+                        <option value=".luau">.luau</option>
+                        <option value=".lua">.lua</option>
+                        <option value=".txt">.txt</option>
+                    </select>
+                    <button onclick="doDownload()" class="action-btn" style="padding: 0.4rem 1rem;">Save File</button>
                 </div>
             </div>
         </div>
@@ -124,19 +114,8 @@
         let mode = 'very-strong';
         const elIn = document.getElementById('input'), elOut = document.getElementById('output');
 
-        function toggleTheme() {
-            const d = document.documentElement;
-            const next = d.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            d.setAttribute('data-theme', next);
-            document.getElementById('theme-label').innerText = next.charAt(0).toUpperCase() + next.slice(1);
-        }
-
-        function toggleStyle() {
-            const d = document.documentElement;
-            const next = d.getAttribute('data-style') === 'abaui' ? 'default' : 'abaui';
-            d.setAttribute('data-style', next);
-            document.getElementById('style-label').innerText = next.charAt(0).toUpperCase() + next.slice(1);
-        }
+        function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
+        function toggleStyle() { document.documentElement.setAttribute('data-style', document.documentElement.getAttribute('data-style') === 'abaui' ? 'default' : 'abaui'); }
 
         function setMode(m) {
             mode = m;
@@ -151,20 +130,16 @@
             return (b / Math.pow(1024, i)).toFixed(2) + " " + ['B', 'KB', 'MB', 'GB'][i];
         }
 
-        function updateStats(t, p) {
-            const bytes = new Blob([t]).size;
-            document.getElementById(p + '-lines').innerText = `Lines: ${t ? t.split('\n').length : 0}`;
-            document.getElementById(p + '-size').innerText = `Size: ${formatSize(bytes)}`;
-            const bar = document.getElementById('stat-' + p);
-            const old = bar.querySelector('.impressed'); if(old) old.remove();
-            if(bytes >= 1048576) {
-                const s = document.createElement('span'); s.className = 'impressed'; s.innerText = "✨ IMPRESSED!"; bar.appendChild(s);
-            }
+        function syncGutter(el, gid) {
+            const lines = el.value.split('\n').length;
+            let h = ''; for (let i = 1; i <= lines; i++) h += i + '\n';
+            const g = document.getElementById(gid);
+            g.innerText = h; g.scrollTop = el.scrollTop;
         }
 
         function process() {
             let c = elIn.value;
-            if (!c) { elOut.value = ""; updateStats("", 'in'); updateStats("", 'out'); sync("", 'gutter-in'); sync("", 'gutter-out'); return; }
+            if (!c) { elOut.value = ""; updateStats("", 'in'); updateStats("", 'out'); syncGutter(elIn, 'gutter-in'); syncGutter(elOut, 'gutter-out'); return; }
             
             c = c.replace(/--\[(=*)\[[\s\S]*?\]\1\]/g, ''); 
             if (mode !== 'lines') c = c.replace(/\s*--.*$/gm, '');
@@ -172,9 +147,8 @@
             if (['medium', 'strong', 'very-strong'].includes(mode)) c = c.replace(/\s*([=+*/%^#<>~])\s*/g, '$1');
 
             if (['strong', 'very-strong'].includes(mode)) {
-                c = c.replace(/\b([a-zA-Z_]\w*)\s*\(\s*(["'])(.*?)\2\s*\)/g, (m, func, quote, content) => {
-                    if (content.includes('\\') || content.includes('\n')) return m;
-                    return `${func}'${content}'`;
+                c = c.replace(/\b([a-zA-Z_]\w*)\s*\(\s*(["'])(.*?)\2\s*\)/g, (m, f, q, content) => {
+                    return (!content.includes('\\') && !content.includes('\n')) ? `${f}'${content}'` : m;
                 });
                 c = c.replace(/\s+/g, ' ').replace(/\s*([=+\-*/%^#<>~;:,{}()\[\]])\s*/g, '$1').trim();
             }
@@ -195,22 +169,33 @@
 
             elOut.value = c;
             updateStats(elIn.value, 'in'); updateStats(elOut.value, 'out');
-            sync(elIn.value, 'gutter-in'); sync(elOut.value, 'gutter-out');
+            syncGutter(elIn, 'gutter-in'); syncGutter(elOut, 'gutter-out');
         }
 
-        function sync(t, id) {
-            const l = t.split('\n').length;
-            let h = ''; for (let i = 1; i <= l; i++) h += i + '\n';
-            document.getElementById(id).innerText = h;
+        function updateStats(t, p) {
+            const b = new Blob([t]).size;
+            document.getElementById(p + '-lines').innerText = `Lines: ${t ? t.split('\n').length : 0}`;
+            document.getElementById(p + '-size').innerText = `Size: ${formatSize(b)}`;
         }
 
         async function doPaste() { elIn.value = await navigator.clipboard.readText(); process(); }
         function doCopy() { navigator.clipboard.writeText(elOut.value); document.getElementById('copy-btn').innerText = "Done!"; setTimeout(() => document.getElementById('copy-btn').innerText = "Copy", 1000); }
         function reset() { elIn.value = ""; process(); }
 
+        function doDownload() {
+            if(!elOut.value) return;
+            const blob = new Blob([elOut.value], {type: 'text/plain'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "minified_" + Date.now() + document.getElementById('ext').value;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
         elIn.oninput = process;
-        elIn.onscroll = () => { document.getElementById('gutter-in').scrollTop = elIn.scrollTop; };
-        elOut.onscroll = () => { document.getElementById('gutter-out').scrollTop = elOut.scrollTop; };
+        elIn.onscroll = () => syncGutter(elIn, 'gutter-in');
+        elOut.onscroll = () => syncGutter(elOut, 'gutter-out');
     </script>
 </body>
 </html>
