@@ -12,54 +12,63 @@
             --accent: #0ea5e9; --btn-bg: #ffffff; --grad: linear-gradient(135deg, #0ea5e9, #6366f1);
         }
         [data-theme="dark"] {
-            --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --border: #334155;
+            --bg: #020617; --card: #0f172a; --text: #f8fafc; --border: #1e293b;
             --accent: #38bdf8; --btn-bg: #1e293b; --grad: linear-gradient(135deg, #38bdf8, #818cf8);
         }
 
-        body { background: var(--bg); color: var(--text); font-family: 'General Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; transition: 0.2s; }
+        body { background: var(--bg); color: var(--text); font-family: 'General Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        [data-style="default"] .minifier-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; }
-        [data-style="default"] .pill-btn { background: var(--btn-bg); border: 1px solid var(--border); border-radius: 4px; }
-        [data-style="default"] .pill-btn.active { background: var(--accent); color: #fff; }
-        
-        [data-style="abaui"] .minifier-card { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; }
-        [data-style="abaui"] .pill-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 12px; }
-        [data-style="abaui"] .pill-btn.active { background: var(--grad); color: #fff; border: none; }
-        [data-style="abaui"] .logo-text { font-family: 'Clash Display'; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        /* ABAUI STYLE - PREMIUM GLASSMORPHISM */
+        [data-style="abaui"] body { background: radial-gradient(circle at top left, #1e1b4b, #020617); }
+        [data-style="abaui"] .minifier-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+        [data-style="abaui"] .pill-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; color: rgba(255,255,255,0.6); }
+        [data-style="abaui"] .pill-btn.active { background: var(--grad); color: #fff; border: none; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); }
+        [data-style="abaui"] .logo-text { font-family: 'Clash Display'; font-weight: 600; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        [data-style="abaui"] .action-btn { background: var(--grad); border-radius: 12px; transition: transform 0.2s; }
+        [data-style="abaui"] .action-btn:active { transform: scale(0.95); }
 
-        .editor-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; height: 55vh; padding: 0 1rem; }
+        /* DEFAULT STYLE - MINIMALIST BRUTALISM */
+        [data-style="default"] .minifier-card { background: var(--card); border: 2px solid var(--text); border-radius: 0px; box-shadow: 8px 8px 0px var(--text); }
+        [data-style="default"] .pill-btn { background: var(--card); border: 2px solid var(--text); border-radius: 0px; font-weight: 800; text-transform: uppercase; }
+        [data-style="default"] .pill-btn.active { background: #facc15; color: #000; }
+        [data-style="default"] .action-btn { background: var(--text); color: var(--card); border-radius: 0px; text-transform: uppercase; font-weight: 800; }
+
+        /* Editor Core */
+        .editor-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; height: 55vh; padding: 0 1rem; }
         @media (max-width: 1024px) { .editor-container { grid-template-columns: 1fr; height: auto; } .minifier-card { height: 400px; } }
 
-        .editor-wrap { position: relative; display: flex; flex: 1; overflow: hidden; font-family: 'ui-monospace', monospace; font-size: 13px; line-height: 20px; }
-        .line-gutter { padding: 20px 0; text-align: right; min-width: 50px; opacity: 0.2; border-right: 1px solid var(--border); user-select: none; pointer-events: none; white-space: pre; overflow: hidden; }
-        textarea { flex: 1; background: transparent; border: none; outline: none; padding: 20px; color: var(--text); resize: none; tab-size: 4; white-space: pre; overflow: auto; }
+        .editor-wrap { position: relative; display: flex; flex: 1; overflow: hidden; font-family: 'ui-monospace', monospace; font-size: 13px; line-height: 22px; }
+        .line-gutter { padding: 20px 0; text-align: right; min-width: 55px; opacity: 0.2; border-right: 1px solid var(--border); user-select: none; pointer-events: none; white-space: pre; overflow: hidden; }
+        textarea { flex: 1; background: transparent; border: none; outline: none; padding: 20px; color: var(--text); resize: none; tab-size: 4; white-space: pre; overflow: auto; margin: 0; }
 
-        .pill-btn { padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 600; transition: 0.2s; }
-        .action-btn { background: var(--grad); color: white; padding: 0.5rem 1.25rem; border-radius: 8px; font-size: 0.75rem; font-weight: 600; }
-        .stat-bar { padding: 0.75rem 1.5rem; font-size: 0.65rem; font-weight: 700; display: flex; gap: 1rem; border-top: 1px solid var(--border); opacity: 0.6; }
+        .pill-btn { padding: 0.6rem 1.25rem; font-size: 0.75rem; font-weight: 600; transition: 0.2s; white-space: nowrap; }
+        .action-btn { color: white; padding: 0.6rem 1.4rem; font-size: 0.75rem; font-weight: 700; }
+        .stat-bar { padding: 0.8rem 1.5rem; font-size: 0.65rem; font-weight: 700; display: flex; gap: 1rem; border-top: 1px solid var(--border); opacity: 0.5; }
 
-        .download-bar { display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem; margin-top: 1rem; padding: 0 1rem; }
-        .download-select { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem; font-size: 0.75rem; color: var(--text); outline: none; }
+        /* REDESIGNED DOWNLOAD SECTION */
+        .export-group { display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.2); padding: 0.4rem; border-radius: 16px; border: 1px solid var(--border); }
+        .ext-chip { cursor: pointer; padding: 0.4rem 0.8rem; border-radius: 10px; font-size: 0.7rem; font-weight: 700; transition: 0.2s; opacity: 0.5; }
+        .ext-chip.selected { background: var(--text); color: var(--bg); opacity: 1; }
         
-        .site-footer { margin-top: auto; padding: 2rem; text-align: center; opacity: 0.7; font-size: 0.8rem; border-top: 1px solid var(--border); line-height: 1.6; }
+        .site-footer { margin-top: auto; padding: 3rem; text-align: center; opacity: 0.6; font-size: 0.75rem; border-top: 1px solid var(--border); line-height: 1.8; max-width: 800px; margin-inline: auto; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
 <body class="p-4 md:p-10">
 
     <div class="max-w-[1400px] mx-auto w-full">
-        <nav class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
-            <h1 class="logo-text text-3xl font-bold tracking-tight">Luau Minifier</h1>
-            <div class="flex gap-3">
-                <button onclick="toggleTheme()" class="pill-btn">Theme</button>
-                <button onclick="toggleStyle()" class="pill-btn">Style</button>
-                <button onclick="reset()" class="pill-btn text-red-500">Reset</button>
+        <nav class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+            <h1 class="logo-text text-4xl font-bold tracking-tighter">LUAU.MIN</h1>
+            <div class="flex gap-4">
+                <button onclick="toggleTheme()" class="pill-btn">Toggle Theme</button>
+                <button onclick="toggleStyle()" class="pill-btn">Switch Style</button>
+                <button onclick="reset()" class="pill-btn text-red-400">Clear</button>
             </div>
         </nav>
 
-        <div class="flex overflow-x-auto gap-2 mb-6 pb-2 no-scrollbar">
-            <button onclick="setMode('comments')" id="m-comments" class="pill-btn">Comments</button>
-            <button onclick="setMode('lines')" id="m-lines" class="pill-btn">Lines</button>
+        <div class="flex overflow-x-auto gap-3 mb-8 pb-2 no-scrollbar">
+            <button onclick="setMode('comments')" id="m-comments" class="pill-btn">Comments Only</button>
+            <button onclick="setMode('lines')" id="m-lines" class="pill-btn">Line Sync</button>
             <button onclick="setMode('weak')" id="m-weak" class="pill-btn">Weak</button>
             <button onclick="setMode('medium')" id="m-medium" class="pill-btn">Medium</button>
             <button onclick="setMode('strong')" id="m-strong" class="pill-btn">Strong</button>
@@ -68,38 +77,37 @@
 
         <div class="editor-container">
             <div class="minifier-card flex flex-col overflow-hidden">
-                <div class="flex justify-between items-center px-6 py-3 border-b border-[var(--border)]">
-                    <span class="text-[0.6rem] font-bold uppercase opacity-40">Input</span>
-                    <button onclick="doPaste()" class="action-btn">Paste</button>
+                <div class="flex justify-between items-center px-8 py-4 border-b border-[var(--border)]">
+                    <span class="text-[0.6rem] tracking-widest font-black uppercase opacity-30">Raw Input</span>
+                    <button onclick="doPaste()" class="action-btn">PASTE</button>
                 </div>
                 <div class="editor-wrap">
                     <div id="gutter-in" class="line-gutter">1</div>
-                    <textarea id="input" spellcheck="false" wrap="off" placeholder="-- Paste code..."></textarea>
+                    <textarea id="input" spellcheck="false" wrap="off" placeholder="-- Enter code here..."></textarea>
                 </div>
-                <div class="stat-bar" id="stat-in"><span id="in-lines">Lines: 0</span> <span id="in-size">Size: 0 B</span></div>
+                <div class="stat-bar" id="stat-in"><span id="in-lines">LINES: 0</span> <span id="in-size">SIZE: 0 B</span></div>
             </div>
 
-            <div class="flex flex-col">
+            <div class="flex flex-col gap-4">
                 <div class="minifier-card flex flex-col overflow-hidden flex-1">
-                    <div class="flex justify-between items-center px-6 py-3 border-b border-[var(--border)]">
-                        <span class="text-[0.6rem] font-bold uppercase opacity-40">Result</span>
-                        <button onclick="doCopy()" id="copy-btn" class="action-btn">Copy</button>
+                    <div class="flex justify-between items-center px-8 py-4 border-b border-[var(--border)]">
+                        <span class="text-[0.6rem] tracking-widest font-black uppercase opacity-30">Optimized Luau</span>
+                        <button onclick="doCopy()" id="copy-btn" class="action-btn">COPY</button>
                     </div>
                     <div class="editor-wrap">
                         <div id="gutter-out" class="line-gutter">1</div>
                         <textarea id="output" readonly wrap="off" spellcheck="false"></textarea>
                     </div>
-                    <div class="stat-bar" id="stat-out"><span id="out-lines">Lines: 0</span> <span id="out-size">Size: 0 B</span></div>
+                    <div class="stat-bar" id="stat-out"><span id="out-lines">LINES: 0</span> <span id="out-size">SIZE: 0 B</span></div>
                 </div>
                 
-                <div class="download-bar">
-                    <span class="text-[0.7rem] font-bold opacity-50">EXPORT:</span>
-                    <select id="ext" class="download-select">
-                        <option value=".luau">.luau</option>
-                        <option value=".lua">.lua</option>
-                        <option value=".txt">.txt</option>
-                    </select>
-                    <button onclick="doDownload()" class="action-btn" style="padding: 0.4rem 1rem;">Save File</button>
+                <div class="flex justify-between items-center px-2">
+                    <div class="export-group">
+                        <div class="ext-chip selected" onclick="selectExt(this, '.luau')">.LUAU</div>
+                        <div class="ext-chip" onclick="selectExt(this, '.lua')">.LUA</div>
+                        <div class="ext-chip" onclick="selectExt(this, '.txt')">.TXT</div>
+                    </div>
+                    <button onclick="doDownload()" class="action-btn px-10">SAVE FILE</button>
                 </div>
             </div>
         </div>
@@ -107,27 +115,27 @@
 
     <footer class="site-footer">
         <p>The owner of this website respects your internet privacy; this site does not log any of your data.</p>
-        <p>Your ISP, browser, operating system, and the host (Vercel) log your activity. <b>VPN is recommended.</b></p>
+        <p>Your ISP, browser, operating system, and the host (Vercel) log your activity. <b>A VPN is highly recommended.</b></p>
     </footer>
 
     <script>
-        let mode = 'very-strong';
+        let mode = 'very-strong', selectedExt = '.luau';
         const elIn = document.getElementById('input'), elOut = document.getElementById('output');
 
         function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
         function toggleStyle() { document.documentElement.setAttribute('data-style', document.documentElement.getAttribute('data-style') === 'abaui' ? 'default' : 'abaui'); }
+        
+        function selectExt(el, ext) {
+            document.querySelectorAll('.ext-chip').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            selectedExt = ext;
+        }
 
         function setMode(m) {
             mode = m;
             document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('m-' + m).classList.add('active');
             process();
-        }
-
-        function formatSize(b) {
-            if (b === 0) return "0 B";
-            const i = Math.floor(Math.log(b) / Math.log(1024));
-            return (b / Math.pow(1024, i)).toFixed(2) + " " + ['B', 'KB', 'MB', 'GB'][i];
         }
 
         function syncGutter(el, gid) {
@@ -174,23 +182,23 @@
 
         function updateStats(t, p) {
             const b = new Blob([t]).size;
-            document.getElementById(p + '-lines').innerText = `Lines: ${t ? t.split('\n').length : 0}`;
-            document.getElementById(p + '-size').innerText = `Size: ${formatSize(b)}`;
+            document.getElementById(p + '-lines').innerText = `LINES: ${t ? t.split('\n').length : 0}`;
+            let sz = b === 0 ? "0 B" : (b < 1024 ? b + " B" : (b / 1024).toFixed(2) + " KB");
+            if (b >= 1048576) sz = (b / 1048576).toFixed(2) + " MB";
+            document.getElementById(p + '-size').innerText = `SIZE: ${sz}`;
         }
 
         async function doPaste() { elIn.value = await navigator.clipboard.readText(); process(); }
-        function doCopy() { navigator.clipboard.writeText(elOut.value); document.getElementById('copy-btn').innerText = "Done!"; setTimeout(() => document.getElementById('copy-btn').innerText = "Copy", 1000); }
+        function doCopy() { navigator.clipboard.writeText(elOut.value); document.getElementById('copy-btn').innerText = "DONE"; setTimeout(() => document.getElementById('copy-btn').innerText = "COPY", 1000); }
         function reset() { elIn.value = ""; process(); }
 
         function doDownload() {
             if(!elOut.value) return;
             const blob = new Blob([elOut.value], {type: 'text/plain'});
-            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url;
-            a.download = "minified_" + Date.now() + document.getElementById('ext').value;
+            a.href = URL.createObjectURL(blob);
+            a.download = "script_" + Date.now() + selectedExt;
             a.click();
-            URL.revokeObjectURL(url);
         }
 
         elIn.oninput = process;
@@ -198,4 +206,5 @@
         elOut.onscroll = () => syncGutter(elOut, 'gutter-out');
     </script>
 </body>
-</html>
+                    </html>
+                        
