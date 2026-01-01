@@ -2,121 +2,125 @@
 <html lang="en" data-theme="dark" data-style="abaui">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Luau Minifier</title>
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --border: #e2e8f0;
-            --accent: #0ea5e9; --btn-bg: #ffffff; --grad: linear-gradient(135deg, #0ea5e9, #6366f1);
-        }
-        [data-theme="dark"] {
             --bg: #020617; --card: #0f172a; --text: #f8fafc; --border: #1e293b;
-            --accent: #38bdf8; --btn-bg: #1e293b; --grad: linear-gradient(135deg, #38bdf8, #818cf8);
+            --accent: #38bdf8; --grad: linear-gradient(135deg, #38bdf8, #818cf8);
+        }
+        [data-theme="light"] {
+            --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --border: #e2e8f0;
+            --accent: #0ea5e9; --grad: linear-gradient(135deg, #0ea5e9, #6366f1);
         }
 
-        body { background: var(--bg); color: var(--text); font-family: 'General Sans', sans-serif; min-height: 100vh; display: flex; flex-direction: column; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { 
+            background: var(--bg); color: var(--text); font-family: 'General Sans', sans-serif; 
+            height: 100dvh; display: flex; flex-direction: column; transition: 0.3s;
+            margin: 0; overflow: hidden;
+        }
 
-        /* ABAUI STYLE - PREMIUM GLASSMORPHISM */
-        [data-style="abaui"] body { background: radial-gradient(circle at top left, #1e1b4b, #020617); }
-        [data-style="abaui"] .minifier-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-        [data-style="abaui"] .pill-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; color: rgba(255,255,255,0.6); }
-        [data-style="abaui"] .pill-btn.active { background: var(--grad); color: #fff; border: none; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); }
-        [data-style="abaui"] .logo-text { font-family: 'Clash Display'; font-weight: 600; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        [data-style="abaui"] .action-btn { background: var(--grad); border-radius: 12px; transition: transform 0.2s; }
-        [data-style="abaui"] .action-btn:active { transform: scale(0.95); }
+        /* Style Personalities */
+        [data-style="abaui"] .minifier-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1.5rem; }
+        [data-style="abaui"] .pill-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        [data-style="abaui"] .pill-btn.active { background: var(--grad); border: none; }
 
-        /* DEFAULT STYLE - MINIMALIST BRUTALISM */
-        [data-style="default"] .minifier-card { background: var(--card); border: 2px solid var(--text); border-radius: 0px; box-shadow: 8px 8px 0px var(--text); }
-        [data-style="default"] .pill-btn { background: var(--card); border: 2px solid var(--text); border-radius: 0px; font-weight: 800; text-transform: uppercase; }
-        [data-style="default"] .pill-btn.active { background: #facc15; color: #000; }
-        [data-style="default"] .action-btn { background: var(--text); color: var(--card); border-radius: 0px; text-transform: uppercase; font-weight: 800; }
+        [data-style="default"] .minifier-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; }
+        [data-style="default"] .pill-btn { background: var(--card); border: 1px solid var(--border); border-radius: 4px; }
+        [data-style="default"] .pill-btn.active { background: var(--accent); color: #fff; }
 
-        /* Editor Core */
-        .editor-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; height: 55vh; padding: 0 1rem; }
-        @media (max-width: 1024px) { .editor-container { grid-template-columns: 1fr; height: auto; } .minifier-card { height: 400px; } }
-
-        .editor-wrap { position: relative; display: flex; flex: 1; overflow: hidden; font-family: 'ui-monospace', monospace; font-size: 13px; line-height: 22px; }
-        .line-gutter { padding: 20px 0; text-align: right; min-width: 55px; opacity: 0.2; border-right: 1px solid var(--border); user-select: none; pointer-events: none; white-space: pre; overflow: hidden; }
-        textarea { flex: 1; background: transparent; border: none; outline: none; padding: 20px; color: var(--text); resize: none; tab-size: 4; white-space: pre; overflow: auto; margin: 0; }
-
-        .pill-btn { padding: 0.6rem 1.25rem; font-size: 0.75rem; font-weight: 600; transition: 0.2s; white-space: nowrap; }
-        .action-btn { color: white; padding: 0.6rem 1.4rem; font-size: 0.75rem; font-weight: 700; }
-        .stat-bar { padding: 0.8rem 1.5rem; font-size: 0.65rem; font-weight: 700; display: flex; gap: 1rem; border-top: 1px solid var(--border); opacity: 0.5; }
-
-        /* REDESIGNED DOWNLOAD SECTION */
-        .export-group { display: flex; align-items: center; gap: 0.5rem; background: rgba(0,0,0,0.2); padding: 0.4rem; border-radius: 16px; border: 1px solid var(--border); }
-        .ext-chip { cursor: pointer; padding: 0.4rem 0.8rem; border-radius: 10px; font-size: 0.7rem; font-weight: 700; transition: 0.2s; opacity: 0.5; }
-        .ext-chip.selected { background: var(--text); color: var(--bg); opacity: 1; }
+        /* Liquid Layout System */
+        .app-container { display: flex; flex-direction: column; height: 100%; padding: clamp(0.5rem, 2vw, 1.5rem); gap: 1rem; }
         
-        .site-footer { margin-top: auto; padding: 3rem; text-align: center; opacity: 0.6; font-size: 0.75rem; border-top: 1px solid var(--border); line-height: 1.8; max-width: 800px; margin-inline: auto; }
+        .main-grid { 
+            display: flex; flex: 1; gap: 1rem; min-height: 0;
+            flex-direction: row; /* Desktop/Laptop Side-by-Side */
+        }
+        
+        /* Phone & Vertical Tablet Aspect Ratio */
+        @media (max-aspect-ratio: 13/10), (max-width: 768px) { 
+            .main-grid { flex-direction: column; } 
+            .nav-header h1 { font-size: 1.25rem; }
+        }
+
+        .minifier-card { display: flex; flex-direction: column; flex: 1; min-height: 0; min-width: 0; }
+        
+        /* Typography & Editor Alignment */
+        .editor-wrap { position: relative; display: flex; flex: 1; min-height: 0; font-family: 'ui-monospace', monospace; line-height: 1.5; font-size: clamp(10px, 0.85rem, 14px); }
+        .line-gutter { padding: 1rem 0; text-align: right; min-width: 3rem; opacity: 0.2; border-right: 1px solid var(--border); user-select: none; pointer-events: none; white-space: pre; overflow: hidden; }
+        textarea { flex: 1; background: transparent; border: none; outline: none; padding: 1rem; color: var(--text); resize: none; tab-size: 4; white-space: pre; overflow: auto; margin: 0; }
+
+        .action-btn { background: var(--grad); color: white; padding: 0.4rem 1rem; border-radius: 8px; font-weight: 700; font-size: 0.7rem; transition: 0.2s; }
+        .action-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        
+        /* Export Section */
+        .export-footer { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; padding-top: 0.5rem; }
+        .ext-group { display: flex; background: rgba(0,0,0,0.2); padding: 0.25rem; border-radius: 12px; border: 1px solid var(--border); }
+        .ext-btn { cursor: pointer; padding: 0.4rem 0.8rem; border-radius: 8px; font-size: 0.65rem; font-weight: 800; opacity: 0.5; transition: 0.2s; }
+        .ext-btn.active { background: #fff; color: #000; opacity: 1; }
+
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body class="p-4 md:p-10">
+<body>
 
-    <div class="max-w-[1400px] mx-auto w-full">
-        <nav class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
-            <h1 class="logo-text text-4xl font-bold tracking-tighter">LUAU.MIN</h1>
-            <div class="flex gap-4">
-                <button onclick="toggleTheme()" class="pill-btn">Toggle Theme</button>
-                <button onclick="toggleStyle()" class="pill-btn">Switch Style</button>
-                <button onclick="reset()" class="pill-btn text-red-400">Clear</button>
+    <div class="app-container">
+        <header class="flex justify-between items-center gap-4">
+            <h1 class="text-2xl font-bold tracking-tighter" style="font-family: 'Clash Display'">LUAU.MIN</h1>
+            <div class="flex gap-2">
+                <button onclick="toggleTheme()" class="pill-btn text-[0.65rem] px-3 py-1.5">Theme</button>
+                <button onclick="toggleStyle()" class="pill-btn text-[0.65rem] px-3 py-1.5">Style</button>
+                <button onclick="reset()" class="pill-btn text-[0.65rem] px-3 py-1.5 text-red-400">Clear</button>
             </div>
-        </nav>
+        </header>
 
-        <div class="flex overflow-x-auto gap-3 mb-8 pb-2 no-scrollbar">
-            <button onclick="setMode('comments')" id="m-comments" class="pill-btn">Comments Only</button>
-            <button onclick="setMode('lines')" id="m-lines" class="pill-btn">Line Sync</button>
-            <button onclick="setMode('weak')" id="m-weak" class="pill-btn">Weak</button>
-            <button onclick="setMode('medium')" id="m-medium" class="pill-btn">Medium</button>
-            <button onclick="setMode('strong')" id="m-strong" class="pill-btn">Strong</button>
-            <button onclick="setMode('very-strong')" id="m-very-strong" class="pill-btn active">Very Strong</button>
+        <div class="flex gap-2 overflow-x-auto no-scrollbar">
+            <button onclick="setMode('weak')" id="m-weak" class="pill-btn px-4 py-1.5 text-[0.7rem]">Weak</button>
+            <button onclick="setMode('medium')" id="m-medium" class="pill-btn px-4 py-1.5 text-[0.7rem]">Medium</button>
+            <button onclick="setMode('strong')" id="m-strong" class="pill-btn px-4 py-1.5 text-[0.7rem]">Strong</button>
+            <button onclick="setMode('very-strong')" id="m-very-strong" class="pill-btn active px-4 py-1.5 text-[0.7rem]">Very Strong</button>
         </div>
 
-        <div class="editor-container">
-            <div class="minifier-card flex flex-col overflow-hidden">
-                <div class="flex justify-between items-center px-8 py-4 border-b border-[var(--border)]">
-                    <span class="text-[0.6rem] tracking-widest font-black uppercase opacity-30">Raw Input</span>
+        <main class="main-grid">
+            <div class="minifier-card overflow-hidden">
+                <div class="flex justify-between items-center p-3 sm:p-4 border-b border-[var(--border)]">
+                    <span class="text-[0.6rem] font-bold opacity-30 uppercase tracking-widest">Input Code</span>
                     <button onclick="doPaste()" class="action-btn">PASTE</button>
                 </div>
                 <div class="editor-wrap">
                     <div id="gutter-in" class="line-gutter">1</div>
-                    <textarea id="input" spellcheck="false" wrap="off" placeholder="-- Enter code here..."></textarea>
+                    <textarea id="input" spellcheck="false" wrap="off" placeholder="-- Enter Luau..."></textarea>
                 </div>
-                <div class="stat-bar" id="stat-in"><span id="in-lines">LINES: 0</span> <span id="in-size">SIZE: 0 B</span></div>
             </div>
 
-            <div class="flex flex-col gap-4">
-                <div class="minifier-card flex flex-col overflow-hidden flex-1">
-                    <div class="flex justify-between items-center px-8 py-4 border-b border-[var(--border)]">
-                        <span class="text-[0.6rem] tracking-widest font-black uppercase opacity-30">Optimized Luau</span>
-                        <button onclick="doCopy()" id="copy-btn" class="action-btn">COPY</button>
-                    </div>
-                    <div class="editor-wrap">
-                        <div id="gutter-out" class="line-gutter">1</div>
-                        <textarea id="output" readonly wrap="off" spellcheck="false"></textarea>
-                    </div>
-                    <div class="stat-bar" id="stat-out"><span id="out-lines">LINES: 0</span> <span id="out-size">SIZE: 0 B</span></div>
+            <div class="minifier-card overflow-hidden">
+                <div class="flex justify-between items-center p-3 sm:p-4 border-b border-[var(--border)]">
+                    <span class="text-[0.6rem] font-bold opacity-30 uppercase tracking-widest">Minified Result</span>
+                    <button onclick="doCopy()" id="copy-btn" class="action-btn">COPY</button>
                 </div>
-                
-                <div class="flex justify-between items-center px-2">
-                    <div class="export-group">
-                        <div class="ext-chip selected" onclick="selectExt(this, '.luau')">.LUAU</div>
-                        <div class="ext-chip" onclick="selectExt(this, '.lua')">.LUA</div>
-                        <div class="ext-chip" onclick="selectExt(this, '.txt')">.TXT</div>
-                    </div>
-                    <button onclick="doDownload()" class="action-btn px-10">SAVE FILE</button>
+                <div class="editor-wrap">
+                    <div id="gutter-out" class="line-gutter">1</div>
+                    <textarea id="output" readonly wrap="off" spellcheck="false"></textarea>
                 </div>
             </div>
-        </div>
+        </main>
+
+        <footer class="export-footer">
+            <div class="flex items-center gap-4">
+                <div class="ext-group">
+                    <div class="ext-btn active" onclick="selExt(this, '.luau')">.LUAU</div>
+                    <div class="ext-btn" onclick="selExt(this, '.lua')">.LUA</div>
+                    <div class="ext-btn" onclick="selExt(this, '.txt')">.TXT</div>
+                </div>
+                <button onclick="doDownload()" class="action-btn px-8 py-2.5">DOWNLOAD</button>
+            </div>
+            <p class="text-[0.6rem] opacity-30 text-right leading-tight max-w-[300px]">
+                Privacy: This site does not log data. Your ISP, Browser, OS, and Vercel may log activity. VPN is recommended.
+            </p>
+        </footer>
     </div>
-
-    <footer class="site-footer">
-        <p>The owner of this website respects your internet privacy; this site does not log any of your data.</p>
-        <p>Your ISP, browser, operating system, and the host (Vercel) log your activity. <b>A VPN is highly recommended.</b></p>
-    </footer>
 
     <script>
         let mode = 'very-strong', selectedExt = '.luau';
@@ -124,17 +128,11 @@
 
         function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
         function toggleStyle() { document.documentElement.setAttribute('data-style', document.documentElement.getAttribute('data-style') === 'abaui' ? 'default' : 'abaui'); }
-        
-        function selectExt(el, ext) {
-            document.querySelectorAll('.ext-chip').forEach(c => c.classList.remove('selected'));
-            el.classList.add('selected');
-            selectedExt = ext;
-        }
+        function selExt(el, ext) { document.querySelectorAll('.ext-btn').forEach(d => d.classList.remove('active')); el.classList.add('active'); selectedExt = ext; }
 
         function setMode(m) {
             mode = m;
-            document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById('m-' + m).classList.add('active');
+            document.querySelectorAll('.pill-btn').forEach(b => b.classList.toggle('active', b.id === 'm-' + m));
             process();
         }
 
@@ -147,20 +145,14 @@
 
         function process() {
             let c = elIn.value;
-            if (!c) { elOut.value = ""; updateStats("", 'in'); updateStats("", 'out'); syncGutter(elIn, 'gutter-in'); syncGutter(elOut, 'gutter-out'); return; }
-            
-            c = c.replace(/--\[(=*)\[[\s\S]*?\]\1\]/g, ''); 
-            if (mode !== 'lines') c = c.replace(/\s*--.*$/gm, '');
+            if (!c) { elOut.value = ""; syncGutter(elIn, 'gutter-in'); syncGutter(elOut, 'gutter-out'); return; }
+            c = c.replace(/--\[(=*)\[[\s\S]*?\]\1\]/g, '').replace(/\s*--.*$/gm, '');
             if (mode !== 'comments') c = c.replace(/^\s*[\r\n]/gm, '');
             if (['medium', 'strong', 'very-strong'].includes(mode)) c = c.replace(/\s*([=+*/%^#<>~])\s*/g, '$1');
-
             if (['strong', 'very-strong'].includes(mode)) {
-                c = c.replace(/\b([a-zA-Z_]\w*)\s*\(\s*(["'])(.*?)\2\s*\)/g, (m, f, q, content) => {
-                    return (!content.includes('\\') && !content.includes('\n')) ? `${f}'${content}'` : m;
-                });
+                c = c.replace(/\b([a-zA-Z_]\w*)\s*\(\s*(["'])(.*?)\2\s*\)/g, (m, f, q, content) => (!content.includes('\\') && !content.includes('\n')) ? `${f}'${content}'` : m);
                 c = c.replace(/\s+/g, ' ').replace(/\s*([=+\-*/%^#<>~;:,{}()\[\]])\s*/g, '$1').trim();
             }
-
             if (mode === 'very-strong') {
                 let cnt = 0, map = {};
                 c = c.replace(/\blocal\s+([a-zA-Z_]\w*)/g, (m, n) => {
@@ -174,30 +166,19 @@
                     return `local ${map[n]}`;
                 });
             }
-
             elOut.value = c;
-            updateStats(elIn.value, 'in'); updateStats(elOut.value, 'out');
             syncGutter(elIn, 'gutter-in'); syncGutter(elOut, 'gutter-out');
         }
 
-        function updateStats(t, p) {
-            const b = new Blob([t]).size;
-            document.getElementById(p + '-lines').innerText = `LINES: ${t ? t.split('\n').length : 0}`;
-            let sz = b === 0 ? "0 B" : (b < 1024 ? b + " B" : (b / 1024).toFixed(2) + " KB");
-            if (b >= 1048576) sz = (b / 1048576).toFixed(2) + " MB";
-            document.getElementById(p + '-size').innerText = `SIZE: ${sz}`;
-        }
-
-        async function doPaste() { elIn.value = await navigator.clipboard.readText(); process(); }
+        async function doPaste() { try { elIn.value = await navigator.clipboard.readText(); process(); } catch(e) {} }
         function doCopy() { navigator.clipboard.writeText(elOut.value); document.getElementById('copy-btn').innerText = "DONE"; setTimeout(() => document.getElementById('copy-btn').innerText = "COPY", 1000); }
         function reset() { elIn.value = ""; process(); }
-
         function doDownload() {
             if(!elOut.value) return;
             const blob = new Blob([elOut.value], {type: 'text/plain'});
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = "script_" + Date.now() + selectedExt;
+            a.download = "minified_" + Date.now() + selectedExt;
             a.click();
         }
 
@@ -206,5 +187,4 @@
         elOut.onscroll = () => syncGutter(elOut, 'gutter-out');
     </script>
 </body>
-                    </html>
-                        
+</html>
