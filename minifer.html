@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-style="abaui">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Roblox Luau Minifier</title>
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --border: #e2e8f0;
+            --accent: #0ea5e9; --btn-bg: #ffffff; --btn-text: #0f172a;
+            --glass: rgba(255, 255, 255, 0.7); --grad: linear-gradient(135deg, #0ea5e9, #6366f1);
+        }
+        [data-theme="dark"] {
+            --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --border: #334155;
+            --accent: #38bdf8; --btn-bg: #1e293b; --btn-text: #f8fafc;
+            --glass: rgba(15, 23, 42, 0.7); --grad: linear-gradient(135deg, #38bdf8, #818cf8);
+        }
+
+        body { background: var(--bg); color: var(--text); font-family: 'General Sans', sans-serif; min-height: 100vh; transition: 0.2s; }
+
+        /* DEFAULT STYLE: FLAT & SOLID */
+        [data-style="default"] body { background: var(--bg) !important; }
+        [data-style="default"] .minifier-card { 
+            background: var(--card) !important; 
+            border: 1px solid var(--border) !important; 
+            border-radius: 4px; box-shadow: none; backdrop-filter: none; 
+        }
+        [data-style="default"] .pill-btn { background: var(--btn-bg); border: 1px solid var(--border); border-radius: 4px; color: var(--text); }
+        [data-style="default"] .pill-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        [data-style="default"] .action-btn { background: var(--accent); color: #fff; border-radius: 4px; }
+        [data-style="default"] .logo-text { background: none; -webkit-text-fill-color: var(--text); color: var(--text); }
+
+        /* ABAUI STYLE: GLASS & GRADIENTS */
+        [data-style="abaui"] body { background: linear-gradient(135deg, var(--bg), var(--card)) !important; }
+        [data-style="abaui"] .minifier-card { 
+            background: var(--glass) !important; 
+            backdrop-filter: blur(20px) saturate(180%); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        }
+        [data-style="abaui"] .pill-btn { background: var(--glass); border: 1px solid var(--border); border-radius: 12px; }
+        [data-style="abaui"] .pill-btn.active { background: var(--grad); color: #fff; border: none; }
+        [data-style="abaui"] .action-btn { background: var(--grad); border-radius: 10px; box-shadow: 0 4px 15px rgba(14,165,233,0.3); }
+        [data-style="abaui"] .logo-text { 
+            font-family: 'Clash Display'; background: var(--grad); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+        }
+
+        .editor-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; height: 50vh; }
+        @media (max-width: 1024px) { .editor-container { grid-template-columns: 1fr; height: auto; } .minifier-card { height: 400px; } }
+
+        .line-gutter { font-family: monospace; font-size: 11px; padding: 1.5rem 0.5rem; text-align: right; min-width: 45px; opacity: 0.4; border-right: 1px solid var(--border); overflow: hidden; }
+        textarea { width: 100%; height: 100%; background: transparent; border: none; outline: none; padding: 1.5rem; font-family: monospace; font-size: 14px; color: var(--text); resize: none; }
+        .pill-btn { padding: 0.5rem 1rem; font-size: 0.8rem; font-weight: 600; transition: 0.2s; }
+        .action-btn { color: white; padding: 0.5rem 1.25rem; font-size: 0.75rem; font-weight: 600; }
+        .stat-bar { padding: 0.75rem 1.5rem; font-size: 0.65rem; font-weight: 700; display: flex; gap: 1rem; border-top: 1px solid var(--border); opacity: 0.7; }
+        .site-footer { margin-top: auto; padding: 2rem; text-align: center; opacity: 0.6; font-size: 0.75rem; border-top: 1px solid var(--border); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="p-4 md:p-10">
+
+    <div class="max-w-[1400px] mx-auto w-full">
+        <nav class="flex flex-col md:flex-row justify-between items-center mb-10 gap-6">
+            <h1 class="logo-text text-3xl font-bold tracking-tight">Roblox Luau Minifier</h1>
+            <div class="flex gap-3">
+                <button onclick="toggleTheme()" class="pill-btn">Theme: <span id="theme-label">Dark</span></button>
+                <button onclick="toggleStyle()" class="pill-btn">Style: <span id="style-label">Abaui</span></button>
+                <button onclick="reset()" class="pill-btn text-red-500">Reset</button>
+            </div>
+        </nav>
+
+        <div class="flex overflow-x-auto gap-2 mb-8 pb-2 no-scrollbar">
+            <button onclick="setMode('comments')" id="m-comments" class="pill-btn">Comments</button>
+            <button onclick="setMode('lines')" id="m-lines" class="pill-btn">Lines</button>
+            <button onclick="setMode('weak')" id="m-weak" class="pill-btn">Weak</button>
+            <button onclick="setMode('medium')" id="m-medium" class="pill-btn">Medium</button>
+            <button onclick="setMode('strong')" id="m-strong" class="pill-btn">Strong</button>
+            <button onclick="setMode('very-strong')" id="m-very-strong" class="pill-btn active">Very Strong</button>
+        </div>
+
+        <div class="editor-container">
+            <div class="minifier-card flex flex-col">
+                <div class="flex justify-between items-center px-6 py-4 border-b border-[var(--border)]">
+                    <span class="text-[0.7rem] font-bold uppercase opacity-50">Input</span>
+                    <button onclick="doPaste()" class="action-btn">Paste</button>
+                </div>
+                <div class="flex flex-1 overflow-hidden">
+                    <div id="gutter-in" class="line-gutter">1</div>
+                    <textarea id="input" spellcheck="false" placeholder="-- Enter code..."></textarea>
+                </div>
+                <div class="stat-bar" id="stat-in">
+                    <span id="in-lines">Lines: 0</span> <span id="in-chars">Chars: 0</span> <span id="in-size">Size: 0 B</span>
+                </div>
+            </div>
+
+            <div class="minifier-card flex flex-col">
+                <div class="flex justify-between items-center px-6 py-4 border-b border-[var(--border)]">
+                    <span class="text-[0.7rem] font-bold uppercase opacity-50">Output</span>
+                    <button onclick="doCopy()" id="copy-btn" class="action-btn">Copy</button>
+                </div>
+                <div class="flex flex-1 overflow-hidden">
+                    <div id="gutter-out" class="line-gutter">1</div>
+                    <textarea id="output" readonly spellcheck="false" placeholder="Result..."></textarea>
+                </div>
+                <div class="stat-bar" id="stat-out">
+                    <span id="out-lines">Lines: 0</span> <span id="out-chars">Chars: 0</span> <span id="out-size">Size: 0 B</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>The owner of website respects your privacy and the website does not log anything from you.</p>
+        <p>Your ISP, Your Browser Service/Brand, Vercel (The Host) Logs Your Activity. <b>VPN Recommended</b>.</p>
+    </footer>
+
+    <script>
+        let mode = 'very-strong';
+        const elIn = document.getElementById('input'), elOut = document.getElementById('output');
+
+        function toggleTheme() {
+            const d = document.documentElement;
+            const next = d.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            d.setAttribute('data-theme', next);
+            document.getElementById('theme-label').innerText = next.charAt(0).toUpperCase() + next.slice(1);
+        }
+
+        function toggleStyle() {
+            const d = document.documentElement;
+            const next = d.getAttribute('data-style') === 'abaui' ? 'default' : 'abaui';
+            d.setAttribute('data-style', next);
+            document.getElementById('style-label').innerText = next.charAt(0).toUpperCase() + next.slice(1);
+        }
+
+        function setMode(m) {
+            mode = m;
+            document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+            const target = document.getElementById('m-' + m);
+            if(target) target.classList.add('active');
+            process();
+        }
+
+        function formatSize(b) {
+            if (b === 0) return "0 B";
+            const i = Math.floor(Math.log(b) / Math.log(1024));
+            return (b / Math.pow(1024, i)).toFixed(2) + " " + ['B', 'KB', 'MB', 'GB'][i];
+        }
+
+        function process() {
+            let c = elIn.value;
+            if (!c) { elOut.value = ""; updateStats("", 'in'); updateStats("", 'out'); return; }
+            
+            c = c.replace(/--\[(=*)\[[\s\S]*?\]\1\]/g, ''); 
+            if (mode !== 'lines') c = c.replace(/\s*--.*$/gm, '');
+            if (mode !== 'comments') c = c.replace(/^\s*[\r\n]/gm, '');
+            if (['medium', 'strong', 'very-strong'].includes(mode)) c = c.replace(/\s*([=+*/%^#<>~])\s*/g, '$1');
+            if (['strong', 'very-strong'].includes(mode)) c = c.replace(/\s+/g, ' ').replace(/\s*([=+\-*/%^#<>~;:,{}()\[\]])\s*/g, '$1').trim();
+            if (mode === 'very-strong') {
+                let cnt = 0, map = {};
+                c = c.replace(/\blocal\s+([a-zA-Z_]\w*)/g, (m, n) => {
+                    if (!map[n]) {
+                        const chars = 'abcdefghijklmnopqrstuvwxyz';
+                        let r = '', i = cnt++;
+                        while (i >= 0) { r = chars[i % 26] + r; i = Math.floor(i / 26) - 1; }
+                        map[n] = r;
+                    }
+                    return `local ${map[n]}`;
+                });
+            }
+            elOut.value = c;
+            updateStats(elIn.value, 'in'); updateStats(elOut.value, 'out');
+            sync(elIn.value, 'gutter-in'); sync(elOut.value, 'gutter-out');
+        }
+
+        function updateStats(t, p) {
+            document.getElementById(p + '-lines').innerText = `Lines: ${t ? t.split('\n').length : 0}`;
+            document.getElementById(p + '-chars').innerText = `Chars: ${t.length}`;
+            document.getElementById(p + '-size').innerText = `Size: ${formatSize(new Blob([t]).size)}`;
+        }
+
+        function sync(t, id) {
+            let h = ''; const l = t.split('\n').length;
+            for (let i = 1; i <= l; i++) h += i + '<br>';
+            document.getElementById(id).innerHTML = h;
+        }
+
+        async function doPaste() { elIn.value = await navigator.clipboard.readText(); process(); }
+        function doCopy() { navigator.clipboard.writeText(elOut.value); document.getElementById('copy-btn').innerText = "Done!"; setTimeout(() => document.getElementById('copy-btn').innerText = "Copy", 1000); }
+        function reset() { elIn.value = ""; process(); }
+        elIn.oninput = process;
+        elIn.onscroll = () => document.getElementById('gutter-in').scrollTop = elIn.scrollTop;
+        elOut.onscroll = () => document.getElementById('gutter-out').scrollTop = elOut.scrollTop;
+    </script>
+</body>
+</html>
