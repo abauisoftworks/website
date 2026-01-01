@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Abaui - Scripts</title>
+    <title>Abaui - Minifer</title>
     <meta property="og:title" content="Abaui - Scripts">
     <meta property="og:description" content="New Roblox Website For Exploiters. We Have a Our Scripts, (Not Ours) Executors, Community Scripts And Maybe More.">
     <meta property="og:image" content="https://abaui.vercel.app/icons/abaui.png">
@@ -14,60 +14,55 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --bg: #020617; --card: #0f172a; --text: #f8fafc; --border: #1e293b;
-            --accent: #38bdf8; --grad: linear-gradient(135deg, #38bdf8, #818cf8);
+            --bg: #0a0a0a; --card: #141414; --text: #ffffff; --border: #262626;
+            --accent: #3b82f6; --grad: linear-gradient(135deg, #3b82f6, #2563eb);
         }
         [data-theme="light"] {
-            --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --border: #e2e8f0;
-            --accent: #0ea5e9; --grad: linear-gradient(135deg, #0ea5e9, #6366f1);
+            --bg: #ffffff; --card: #f5f5f5; --text: #000000; --border: #d4d4d4;
         }
 
         body { 
             background: var(--bg); color: var(--text); font-family: 'Satoshi', sans-serif; 
-            height: 100dvh; display: flex; flex-direction: column; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            margin: 0; overflow: hidden;
+            height: 100dvh; display: flex; flex-direction: column; margin: 0; overflow: hidden;
         }
+      
+        [data-style="default"] body { background: var(--bg); }
+        [data-style="default"] .minifier-card { 
+            background: var(--card); border: 2px solid var(--border); border-radius: 0px; 
+            box-shadow: 4px 4px 0px var(--border); 
+        }
+        [data-style="default"] .pill-btn { background: var(--card); border: 1px solid var(--border); border-radius: 0px; font-weight: 800; }
+        [data-style="default"] .pill-btn.active { background: var(--text); color: var(--bg); border-color: var(--text); }
+        [data-style="default"] .icon-btn { border-radius: 0px; border: 2px solid var(--border); background: var(--card); }
+        [data-style="default"] .action-btn { border-radius: 0px; background: var(--text); color: var(--bg); font-weight: 900; }
+        [data-style="default"] .logo-text { font-family: sans-serif; font-weight: 900; text-transform: uppercase; }
 
-        /* --- TOGGLE ICON LOGIC --- */
-        .style-icon-wrapper { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .icon-default { font-weight: 900; font-size: 1.2rem; display: none; }
-        .icon-abaui { width: 28px; height: 28px; object-fit: contain; display: none; }
-
-        [data-style="default"] .icon-default { display: block; }
-        [data-style="abaui"] .icon-abaui { display: block; }
-
-        /* --- ABAUI STYLE --- */
-        [data-style="abaui"] body { background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #020617 100%); }
+        [data-style="abaui"] body { background: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #020617 100%); transition: background 0.5s ease; }
         [data-style="abaui"] .minifier-card { 
-            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px) saturate(150%); 
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 2rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
-        [data-style="abaui"] .pill-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; color: #94a3b8; }
+        [data-style="abaui"] .pill-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; }
         [data-style="abaui"] .pill-btn.active { background: #fff; color: #000; border: none; }
-        [data-style="abaui"] .icon-btn { border-radius: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
-        [data-style="abaui"] .logo-text { font-family: 'Clash Display'; font-weight: 600; color: #fff; }
+        [data-style="abaui"] .icon-btn { border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
+        [data-style="abaui"] .action-btn { background: linear-gradient(135deg, #38bdf8, #818cf8); border-radius: 10px; }
+        [data-style="abaui"] .logo-text { font-family: 'Clash Display'; font-weight: 600; }
 
-        /* --- DEFAULT STYLE --- */
-        [data-style="default"] .minifier-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; }
-        [data-style="default"] .pill-btn { background: var(--card); border: 1px solid var(--border); border-radius: 6px; }
-        [data-style="default"] .pill-btn.active { background: var(--accent); color: #fff; }
-        [data-style="default"] .icon-btn { border-radius: 8px; border: 1px solid var(--border); background: var(--card); }
-
-        /* --- LAYOUT --- */
-        .app-container { display: flex; flex-direction: column; height: 100%; padding: clamp(1rem, 3vw, 2.5rem); gap: 1.5rem; }
-        .main-grid { display: flex; flex: 1; gap: 1.5rem; min-height: 0; flex-direction: row; }
+        .app-container { display: flex; flex-direction: column; height: 100%; padding: 1.5rem; gap: 1.25rem; }
+        .main-grid { display: flex; flex: 1; gap: 1.25rem; min-height: 0; flex-direction: row; }
         @media (max-aspect-ratio: 1/1), (max-width: 800px) { .main-grid { flex-direction: column; } }
 
-        .minifier-card { display: flex; flex-direction: column; flex: 1; min-height: 0; }
-        .editor-wrap { position: relative; display: flex; flex: 1; min-height: 0; font-family: 'JetBrains Mono', monospace; line-height: 1.6; font-size: clamp(12px, 0.9rem, 15px); }
-        .line-gutter { padding: 1.25rem 0; text-align: right; min-width: 4rem; opacity: 0.2; border-right: 1px solid var(--border); user-select: none; pointer-events: none; overflow: hidden; }
-        textarea { flex: 1; background: transparent; border: none; outline: none; padding: 1.25rem; color: var(--text); resize: none; tab-size: 4; white-space: pre; overflow: auto; margin: 0; }
+        .minifier-card { display: flex; flex-direction: column; flex: 1; min-height: 0; transition: all 0.3s ease; }
+        .editor-wrap { position: relative; display: flex; flex: 1; min-height: 0; font-family: 'ui-monospace', monospace; font-size: 13px; }
+        .line-gutter { padding: 1rem 0; text-align: right; min-width: 3.5rem; opacity: 0.2; border-right: 1px solid var(--border); overflow: hidden; }
+        textarea { flex: 1; background: transparent; border: none; outline: none; padding: 1rem; color: inherit; resize: none; white-space: pre; overflow: auto; }
 
-        .action-btn { background: var(--grad); color: white; padding: 0.5rem 1.2rem; border-radius: 10px; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; }
-        .ext-btn { cursor: pointer; padding: 0.5rem 1rem; border-radius: 10px; font-size: 0.7rem; font-weight: 800; opacity: 0.4; }
+        .action-btn { padding: 0.5rem 1rem; font-size: 0.75rem; text-transform: uppercase; transition: 0.2s; }
+        .ext-btn { cursor: pointer; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.65rem; font-weight: 800; opacity: 0.4; transition: 0.2s; }
         .ext-btn.active { background: #fff; color: #000; opacity: 1; }
-
+        
+        svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.5; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
     </style>
 </head>
@@ -75,45 +70,42 @@
 
     <div class="app-container">
         <header class="flex justify-between items-center">
-            <h1 class="logo-text text-3xl sm:text-4xl">ABAUI</h1>
+            <h1 class="logo-text text-3xl">Abaui</h1>
             <div class="flex gap-3">
-                <button onclick="toggleTheme()" class="icon-btn style-icon-wrapper">
-                    <span class="icon-default">T</span>
-                    <img src="icons/abaui.png" class="icon-abaui" alt="Theme">
+                <button onclick="toggleTheme()" class="icon-btn w-10 h-10 flex items-center justify-center">
+                    <svg><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                 </button>
-                <button onclick="toggleStyle()" class="icon-btn style-icon-wrapper">
-                    <span class="icon-default">S</span>
-                    <img src="icons/abaui.png" class="icon-abaui brightness-150" alt="Style">
+                <button onclick="toggleStyle()" class="icon-btn w-10 h-10 flex items-center justify-center">
+                    <svg><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 12h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg>
                 </button>
-                <button onclick="reset()" class="icon-btn style-icon-wrapper">
-                    <span class="icon-default text-red-500">C</span>
-                    <img src="icons/abaui.png" class="icon-abaui hue-rotate-[140deg]" alt="Clear">
+                <button onclick="reset()" class="icon-btn w-10 h-10 flex items-center justify-center text-red-500">
+                    <svg><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                 </button>
             </div>
         </header>
 
-        <div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
-            <button onclick="setMode('weak')" id="m-weak" class="pill-btn px-5 py-2 text-[0.75rem] font-bold">WEAK</button>
-            <button onclick="setMode('medium')" id="m-medium" class="pill-btn px-5 py-2 text-[0.75rem] font-bold">MEDIUM</button>
-            <button onclick="setMode('strong')" id="m-strong" class="pill-btn px-5 py-2 text-[0.75rem] font-bold">STRONG</button>
-            <button onclick="setMode('very-strong')" id="m-very-strong" class="pill-btn active px-5 py-2 text-[0.75rem] font-bold">VERY STRONG</button>
+        <div class="flex gap-2 overflow-x-auto no-scrollbar">
+            <button onclick="setMode('weak')" id="m-weak" class="pill-btn px-4 py-2 text-[0.7rem]">WEAK</button>
+            <button onclick="setMode('medium')" id="m-medium" class="pill-btn px-4 py-2 text-[0.7rem]">MEDIUM</button>
+            <button onclick="setMode('strong')" id="m-strong" class="pill-btn px-4 py-2 text-[0.7rem]">STRONG</button>
+            <button onclick="setMode('very-strong')" id="m-very-strong" class="pill-btn active px-4 py-2 text-[0.7rem]">VERY STRONG</button>
         </div>
 
         <main class="main-grid">
             <div class="minifier-card overflow-hidden">
-                <div class="flex justify-between items-center p-5 border-b border-white/5">
-                    <span class="text-[0.65rem] font-black opacity-20 uppercase tracking-[0.2em]">Input Area</span>
+                <div class="flex justify-between items-center p-4 border-b border-white/5">
+                    <span class="text-[0.6rem] font-bold opacity-30 uppercase">Raw Input</span>
                     <button onclick="doPaste()" class="action-btn">Paste</button>
                 </div>
                 <div class="editor-wrap">
                     <div id="gutter-in" class="line-gutter">1</div>
-                    <textarea id="input" spellcheck="false" wrap="off" placeholder="-- Script here..."></textarea>
+                    <textarea id="input" spellcheck="false" wrap="off"></textarea>
                 </div>
             </div>
 
             <div class="minifier-card overflow-hidden">
-                <div class="flex justify-between items-center p-5 border-b border-white/5">
-                    <span class="text-[0.65rem] font-black opacity-20 uppercase tracking-[0.2em]">Output</span>
+                <div class="flex justify-between items-center p-4 border-b border-white/5">
+                    <span class="text-[0.6rem] font-bold opacity-30 uppercase">Output</span>
                     <button onclick="doCopy()" id="copy-btn" class="action-btn">Copy</button>
                 </div>
                 <div class="editor-wrap">
@@ -123,17 +115,17 @@
             </div>
         </main>
 
-        <footer class="flex flex-wrap justify-between items-center gap-6">
-            <div class="flex items-center gap-4">
-                <div class="flex bg-black/20 p-1.5 rounded-2xl border border-white/5">
+        <footer class="flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="flex bg-black/40 p-1.5 rounded-xl border border-white/5">
                     <div class="ext-btn active" onclick="selExt(this, '.luau')">.LUAU</div>
                     <div class="ext-btn" onclick="selExt(this, '.lua')">.LUA</div>
                     <div class="ext-btn" onclick="selExt(this, '.txt')">.TXT</div>
                 </div>
-                <button onclick="doDownload()" class="action-btn px-10 py-3">Download</button>
+                <button onclick="doDownload()" class="action-btn px-8 py-2.5">Download</button>
             </div>
-            <p class="text-[0.65rem] opacity-20 font-medium text-right leading-relaxed max-w-xs">
-                Privacy: No logs stored. ISP/Vercel activity possible. VPN recommended.
+            <p class="text-[0.6rem] opacity-20 text-right leading-tight max-w-[250px]">
+                No logs. ISP/Vercel activity possible. VPN recommended.
             </p>
         </footer>
     </div>
@@ -143,7 +135,10 @@
         const elIn = document.getElementById('input'), elOut = document.getElementById('output');
 
         function toggleTheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
-        function toggleStyle() { document.documentElement.setAttribute('data-style', document.documentElement.getAttribute('data-style') === 'abaui' ? 'default' : 'abaui'); }
+        function toggleStyle() { 
+            const s = document.documentElement.getAttribute('data-style') === 'abaui' ? 'default' : 'abaui';
+            document.documentElement.setAttribute('data-style', s);
+        }
         function selExt(el, ext) { document.querySelectorAll('.ext-btn').forEach(d => d.classList.remove('active')); el.classList.add('active'); selectedExt = ext; }
         function setMode(m) { mode = m; document.querySelectorAll('.pill-btn').forEach(b => b.classList.toggle('active', b.id === 'm-' + m)); process(); }
 
@@ -189,7 +184,7 @@
             const blob = new Blob([elOut.value], {type: 'text/plain'});
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = "abaui_min_" + Date.now() + selectedExt;
+            a.download = "minified_" + Date.now() + selectedExt;
             a.click();
         }
 
