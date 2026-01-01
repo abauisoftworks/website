@@ -21,6 +21,7 @@
     { "source": "/raw/(.*)", "destination": "/raw/$1.txt" },
     { "source": "/scripts", "destination": "/scripts.html" },
     { "source": "/executors", "destination": "/executors.html" },
+    { "source": "/minfier", "destination": "/minifer.html" },
     { "source": "/api/pagecount", "destination": "/api/pagecount.js" }
   ]
 }
