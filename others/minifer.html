@@ -1,127 +1,190 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-style="abaui">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Abaui - Scripts</title>
-    <meta property="og:title" content="Abaui - Scripts">
-    <meta property="og:description" content="New Roblox Website For Exploiters. We Have a Our Scripts, (Not Ours) Executors, Community Scripts And Maybe More.">
+    <title>Abaui - Script Minifier</title>
+    <meta property="og:title" content="Abaui - Minifier">
+    <meta property="og:description" content="Professional Roblox Luau Minifier with premium Abaui design.">
     <meta property="og:image" content="https://abaui.vercel.app/icons/abaui.png">
-    <meta property="og:url" content="https://abaui-community.vercel.app">
-    <meta property="og:type" content="website">
     <link rel="icon" href="icons/abaui.png" type="image/png">
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500&f[]=clash-display@600&f[]=space-mono@400&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=general-sans@500,600,700&f[]=clash-display@600,500&display=swap" rel="stylesheet">
     <style>
-        :root { --accent: #3b82f6; --t: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
-        body { margin: 0; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; transition: background var(--t), color var(--t); }
+        :root {
+            --primary: #ffffff; --secondary: #f8fafc; --accent: #0ea5e9; --text: #0f172a;
+            --surface: rgba(255, 255, 255, 0.7); --gradient: linear-gradient(135deg, #0ea5e9, #6366f1);
+            --bg-gradient: linear-gradient(135deg, #f8fafc, #ffffff); --text-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+            --hover-gradient: linear-gradient(135deg, #6366f1, #0ea5e9); --nav-bg: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(15, 23, 42, 0.05); --hover-bg: rgba(14, 165, 233, 0.1);
+            --glow: 0 0 30px rgba(14, 165, 233, 0.15); --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.05);
+            --transition: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        [data-theme="dark"] {
+            --primary: #0f172a; --secondary: #1e293b; --accent: #38bdf8; --text: #f8fafc;
+            --surface: rgba(15, 23, 42, 0.7); --gradient: linear-gradient(135deg, #38bdf8, #6366f1);
+            --bg-gradient: linear-gradient(135deg, #0f172a, #1e293b); --text-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            --hover-gradient: linear-gradient(135deg, #6366f1, #38bdf8); --nav-bg: rgba(15, 23, 42, 0.7);
+            --border-color: rgba(255, 255, 255, 0.05); --glow: 0 0 30px rgba(56, 189, 248, 0.15);
+        }
 
-        [data-style="abaui"] body { background: radial-gradient(at top left, #1e1b4b, #020617); color: #f8fafc; font-family: 'Satoshi', sans-serif; }
-        [data-style="abaui"] .minifier-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 32px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
-        [data-style="abaui"] .pill-btn { border-radius: 16px; background: rgba(255,255,255,0.05); border: 1px solid transparent; }
-        [data-style="abaui"] .pill-btn.active { background: #fff; color: #000; transform: scale(1.05); font-weight: 700; }
-        [data-style="abaui"] .action-btn { background: linear-gradient(135deg, #38bdf8, #818cf8); border-radius: 14px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); }
-        [data-style="abaui"] .social-link { background: rgba(255,255,255,0.03); padding: 0.5rem 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); }
-        [data-style="abaui"] .social-link:hover { background: rgba(255,255,255,0.1); transform: translateY(-3px); border-color: #38bdf8; }
-        [data-style="abaui"] .logo { font-family: 'Clash Display'; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'General Sans', sans-serif; background: var(--bg-gradient); color: var(--text);
+            min-height: 100dvh; overflow: hidden; display: flex; flex-direction: column;
+        }
 
-        [data-style="default"] body { background: #000; color: #fff; font-family: 'Space Mono', monospace; }
-        [data-style="default"] .minifier-card { background: #000; border: 3px solid #fff; border-radius: 0px; box-shadow: 8px 8px 0px #333; }
-        [data-style="default"] .pill-btn { border-radius: 0px; border: 2px solid #333; background: #000; }
-        [data-style="default"] .pill-btn.active { background: #fff; color: #000; border-color: #fff; }
-        [data-style="default"] .action-btn { background: #fff; color: #000; border-radius: 0px; font-weight: 900; }
-        [data-style="default"] .social-link { border: 2px solid #333; padding: 0.4rem 0.8rem; font-weight: 900; }
-        [data-style="default"] .social-link:hover { background: #fff; color: #000; }
-        [data-style="default"] .logo { font-weight: 900; text-transform: uppercase; }
+        .nav {
+            padding: 1.25rem 7%; display: flex; justify-content: space-between; align-items: center;
+            background: var(--nav-bg); backdrop-filter: blur(10px) saturate(180%);
+            border-bottom: 1px solid var(--border-color); z-index: 1000;
+        }
+        .logo {
+            font-family: 'Clash Display', sans-serif; font-size: 1.5rem; font-weight: 600;
+            background: var(--gradient); -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; letter-spacing: -0.02em; transition: all 1s ease;
+        }
 
-        .app-shell { display: flex; flex-direction: column; height: 100%; padding: clamp(1rem, 3vw, 2.5rem); gap: 1.5rem; }
-        .editor-grid { display: flex; flex: 1; gap: 1.5rem; min-height: 0; }
-        @media (max-aspect-ratio: 1/1) { .editor-grid { flex-direction: column; } }
-        .editor-container { display: flex; flex-direction: column; flex: 1; min-height: 0; }
-        .text-box { position: relative; display: flex; flex: 1; min-height: 0; font-size: 14px; }
-        textarea { flex: 1; background: transparent; border: none; outline: none; padding: 1.5rem; color: inherit; resize: none; white-space: pre; overflow: auto; }
-        .gutter { padding: 1.5rem 0; text-align: right; min-width: 3.5rem; opacity: 0.2; border-right: 1px solid currentColor; overflow: hidden; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.5; }
+        .main-container { flex: 1; padding: 2rem 7%; display: flex; flex-direction: column; gap: 1.5rem; min-height: 0; }
+        
+        .mode-selector { display: flex; gap: 0.5rem; }
+        .pill-btn {
+            background: var(--surface); border: 1px solid var(--border-color); color: var(--text);
+            padding: 0.6rem 1.2rem; border-radius: 12px; font-size: 0.75rem; font-weight: 600;
+            cursor: pointer; transition: all 0.5s var(--transition); text-transform: uppercase;
+        }
+        .pill-btn.active { background: var(--gradient); color: white; border-color: transparent; box-shadow: var(--glow); }
+
+        .editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; flex: 1; min-height: 0; }
+        @media (max-width: 768px) { .editor-grid { grid-template-columns: 1fr; } }
+
+        .editor-card {
+            background: var(--surface); backdrop-filter: blur(20px); border-radius: 24px;
+            border: 1px solid var(--border-color); display: flex; flex-direction: column;
+            overflow: hidden; transition: all 0.5s var(--transition);
+        }
+        .editor-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg), var(--glow); border-color: var(--accent); }
+        
+        .card-header { 
+            padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .card-title { font-family: 'Clash Display'; font-size: 0.9rem; font-weight: 600; opacity: 0.6; }
+
+        .action-btn {
+            padding: 0.6rem 1.2rem; background: var(--gradient); color: white; border: none;
+            border-radius: 10px; font-weight: 600; font-size: 0.75rem; cursor: pointer;
+            transition: all 0.4s var(--transition);
+        }
+        .action-btn:hover { background: var(--hover-gradient); transform: translateY(-2px); box-shadow: var(--glow); }
+
+        .text-area-wrapper { display: flex; flex: 1; min-height: 0; }
+        .gutter { 
+            width: 3.5rem; padding: 1.5rem 0; text-align: right; opacity: 0.2; 
+            border-right: 1px solid var(--border-color); font-family: monospace; font-size: 13px;
+        }
+        textarea {
+            flex: 1; background: transparent; border: none; outline: none; padding: 1.5rem;
+            color: var(--text); font-family: monospace; resize: none; font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .footer { padding: 1.5rem 7%; display: flex; justify-content: space-between; align-items: center; }
+        .footer-text { font-size: 0.75rem; opacity: 0.4; font-weight: 500; }
+
+        @keyframes heroFadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-up { animation: heroFadeUp 0.8s var(--transition) forwards; }
     </style>
 </head>
 <body>
 
-<div class="app-shell">
-    <header class="flex justify-between items-center">
-        <h1 class="logo text-3xl sm:text-4xl font-bold tracking-tighter">ABAUI</h1>
-        <div class="flex gap-3">
-            <button onclick="toggletheme()" class="w-10 h-10 flex items-center justify-center pill-btn"><svg><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
-            <button onclick="togglestyle()" class="w-10 h-10 flex items-center justify-center pill-btn"><svg><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z"/></svg></button>
-            <button onclick="reset()" class="w-10 h-10 flex items-center justify-center pill-btn text-red-500"><svg><path d="M3 6h18m-2 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6m3 0V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></button>
+    <nav class="nav">
+        <div class="logo">Abaui</div>
+        <div class="nav-controls">
+            <span class="version-text" style="position:static; margin-right:10px; opacity:0.5; font-size:0.7rem">V1.3.0</span>
+            <button onclick="toggletheme()" class="theme-toggle">
+                <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+            </button>
         </div>
-    </header>
+    </nav>
 
-    <div class="flex gap-2 overflow-x-auto no-scrollbar">
-        <button onclick="setmode('weak')" id="m-weak" class="pill-btn px-5 py-2 text-[10px] font-bold uppercase">Weak</button>
-        <button onclick="setmode('medium')" id="m-medium" class="pill-btn px-5 py-2 text-[10px] font-bold uppercase">Medium</button>
-        <button onclick="setmode('strong')" id="m-strong" class="pill-btn px-5 py-2 text-[10px] font-bold uppercase">Strong</button>
-        <button onclick="setmode('very-strong')" id="m-very-strong" class="pill-btn active px-5 py-2 text-[10px] font-bold uppercase">Very Strong</button>
-    </div>
+    <main class="main-container animate-up">
+        <div class="mode-selector">
+            <button onclick="setmode('weak')" id="m-weak" class="pill-btn">Weak</button>
+            <button onclick="setmode('medium')" id="m-medium" class="pill-btn">Medium</button>
+            <button onclick="setmode('strong')" id="m-strong" class="pill-btn">Strong</button>
+            <button onclick="setmode('very-strong')" id="m-very-strong" class="pill-btn active">Very Strong</button>
+        </div>
 
-    <main class="editor-grid">
-        <section class="minifier-card editor-container overflow-hidden">
-            <div class="flex justify-between items-center p-4 border-b border-white/5">
-                <span class="text-[10px] font-bold opacity-30 uppercase tracking-widest">Input</span>
-                <button onclick="dopaste()" class="action-btn px-4 py-1.5 text-xs font-bold">Paste</button>
+        <div class="editor-grid">
+            <div class="editor-card">
+                <div class="card-header">
+                    <span class="card-title">RAW LUAU</span>
+                    <button onclick="dopaste()" class="action-btn">Paste</button>
+                </div>
+                <div class="text-area-wrapper">
+                    <div id="gutter-in" class="gutter">1</div>
+                    <textarea id="input" spellcheck="false" placeholder="-- Paste your script here..."></textarea>
+                </div>
             </div>
-            <div class="text-box">
-                <div id="gutter-in" class="gutter">1</div>
-                <textarea id="input" spellcheck="false" wrap="off"></textarea>
-            </div>
-        </section>
 
-        <section class="minifier-card editor-container overflow-hidden">
-            <div class="flex justify-between items-center p-4 border-b border-white/5">
-                <span class="text-[10px] font-bold opacity-30 uppercase tracking-widest">Minified</span>
-                <button onclick="docopy()" id="copy-btn" class="action-btn px-4 py-1.5 text-xs font-bold">Copy</button>
+            <div class="editor-card">
+                <div class="card-header">
+                    <span class="card-title">MINIFIED</span>
+                    <button onclick="docopy()" id="copy-btn" class="action-btn">Copy</button>
+                </div>
+                <div class="text-area-wrapper">
+                    <div id="gutter-out" class="gutter">1</div>
+                    <textarea id="output" readonly spellcheck="false"></textarea>
+                </div>
             </div>
-            <div class="text-box">
-                <div id="gutter-out" class="gutter">1</div>
-                <textarea id="output" readonly wrap="off" spellcheck="false"></textarea>
-            </div>
-        </section>
+        </div>
     </main>
 
-    <footer class="flex flex-col gap-6">
-        <div class="flex flex-wrap items-center justify-between gap-4">
-            <div class="flex gap-3">
-                <a href="https://github.com/aabbaaii13" target="_blank" class="social-link text-[11px] font-bold">GITHUB</a>
-                <a href="https://www.tiktok.com/@abauicommunity" target="_blank" class="social-link text-[11px] font-bold">TIKTOK</a>
-                <a href="https://discord.gg/hnq9AGVMwq" target="_blank" class="social-link text-[11px] font-bold">DISCORD</a>
-            </div>
-            <button onclick="dodownload()" class="action-btn px-8 py-3 text-xs font-black">Download File</button>
-        </div>
-        <p class="text-[9px] opacity-20 text-center sm:text-right font-bold tracking-widest uppercase">Privacy Guaranteed. No logs stored.</p>
+    <footer class="footer">
+        <span class="footer-text">No logs stored locally. Use a VPN for total anonymity.</span>
+        <button onclick="dodownload()" class="action-btn">Download .luau</button>
     </footer>
-</div>
 
 <script>
     let mode = 'very-strong';
     const elin = document.getElementById('input'), elout = document.getElementById('output');
-    function toggletheme() { document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); }
-    function togglestyle() { document.documentElement.setAttribute('data-style', document.documentElement.getAttribute('data-style') === 'abaui' ? 'default' : 'abaui'); }
-    function setmode(m) { mode = m; document.querySelectorAll('.pill-btn').forEach(b => b.classList.toggle('active', b.id === 'm-' + m)); process(); }
+
+    function toggletheme() { 
+        document.documentElement.setAttribute('data-theme', 
+            document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+        );
+    }
+
+    function setmode(m) { 
+        mode = m; 
+        document.querySelectorAll('.pill-btn').forEach(b => b.classList.toggle('active', b.id === 'm-' + m)); 
+        process(); 
+    }
+
     function syncgutter(el, gid) {
         const lines = el.value.split('\n').length;
         let h = ''; for (let i = 1; i <= lines; i++) h += i + '\n';
         const g = document.getElementById(gid);
         g.innerText = h; g.scrollTop = el.scrollTop;
     }
+
     function process() {
         let c = elin.value;
         if (!c) { elout.value = ""; syncgutter(elin, 'gutter-in'); syncgutter(elout, 'gutter-out'); return; }
+        
         c = c.replace(/--\[(=*)\[[\s\S]*?\]\1\]/g, '').replace(/\s*--.*$/gm, '').replace(/^\s*[\r\n]/gm, '');
-        if (['medium', 'strong', 'very-strong'].includes(mode)) c = c.replace(/\s*([=+*/%^#<>~])\s*/g, '$1');
+        
+        if (['medium', 'strong', 'very-strong'].includes(mode)) {
+            c = c.replace(/\s*([=+*/%^#<>~])\s*/g, '$1');
+        }
+        
         if (['strong', 'very-strong'].includes(mode)) {
-            c = c.replace(/\b([a-zA-Z_]\w*)\s*\(\s*(["'])(.*?)\2\s*\)/g, (m, f, q, content) => (!content.includes('\\') && !content.includes('\n')) ? `${f}'${content}'` : m);
+            c = c.replace(/\b([a-zA-Z_]\w*)\s*\(\s*(["'])(.*?)\2\s*\)/g, (m, f, q, content) => 
+                (!content.includes('\\') && !content.includes('\n')) ? `${f}'${content}'` : m);
             c = c.replace(/\s+/g, ' ').replace(/\s*([=+\-*/%^#<>~;:,{}()\[\]])\s*/g, '$1').trim();
         }
+
         if (mode === 'very-strong') {
             let cnt = 0, map = {};
             c = c.replace(/\blocal\s+([a-zA-Z_]\w*)/g, (m, n) => {
@@ -135,12 +198,21 @@
                 return `local ${map[n]}`;
             });
         }
+        
         elout.value = c;
-        syncgutter(elin, 'gutter-in'); syncgutter(elout, 'gutter-out');
+        syncgutter(elin, 'gutter-in'); 
+        syncgutter(elout, 'gutter-out');
     }
+
     async function dopaste() { try { elin.value = await navigator.clipboard.readText(); process(); } catch(e) {} }
-    function docopy() { navigator.clipboard.writeText(elout.value); document.getElementById('copy-btn').innerText = "DONE"; setTimeout(() => document.getElementById('copy-btn').innerText = "COPY", 1000); }
-    function reset() { elin.value = ""; process(); }
+    
+    function docopy() { 
+        navigator.clipboard.writeText(elout.value); 
+        const b = document.getElementById('copy-btn');
+        const old = b.innerText; b.innerText = "Copied!"; 
+        setTimeout(() => b.innerText = old, 1000); 
+    }
+
     function dodownload() {
         if(!elout.value) return;
         const blob = new Blob([elout.value], {type: 'text/plain'});
@@ -149,6 +221,7 @@
         a.download = "minified_" + Date.now() + ".luau";
         a.click();
     }
+
     elin.oninput = process;
     elin.onscroll = () => syncgutter(elin, 'gutter-in');
     elout.onscroll = () => syncgutter(elout, 'gutter-out');
