@@ -1,11 +1,7 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") 
     return res.status(405).json({ error: "This Method Is Not Allowed!" })
-  let body = {}
-  const chunks = []
-  for await (const chunk of req) chunks.push(chunk)
-  const raw = Buffer.concat(chunks).toString()
-  try { body = JSON.parse(raw) } catch { body = {} }
+  const body = req.body || {}
   const u = body.userid || "0"
   const m = body.message || ""
   const e = body.executor || "Spoofed Or Skidded Or Unknown"
