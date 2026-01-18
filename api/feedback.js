@@ -1,20 +1,18 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") 
-    return res.status(405).json({ error:"Only POST Requests Allowed!" })
-
+    return res.status(405).json({ error: "This Method Is Not Allowed!" })
   let body = {}
   const chunks = []
   for await (const chunk of req) chunks.push(chunk)
   const raw = Buffer.concat(chunks).toString()
   try { body = JSON.parse(raw) } catch { body = {} }
-
-  const userid = body.userid || "0"
-  const message = body.message || ""
-  const clean = message.replace(/@everyone|@here/g, "").replace(/<@&?\d+>/g, "[mention]")
-
+  const u = body.userid || "0"
+  const m = body.message || ""
+  const e = body.executor || "Spoofed Or Skidded Or Unknown"
+  const s = body.script || "Spoofed Or Unknown" 
+  const clean = m.replace(/@everyone|@here/g, "").replace(/<@&?\d+>/g, "[mention]")
   const webhook = process.env.FEEDBACK_HOOK
-  if (!webhook) return res.status(500).json({ error: "no webhook" })
-
+  if (!webhook) return res.status(500).json({ error: "No WebHook" })
   try {
     await fetch(webhook, {
       method: "POST",
@@ -23,17 +21,19 @@ export default async function handler(req, res) {
         content: "<@1138813124946956298>",
         embeds: [
           {
-            title: "Someone Suggested A New Features Or UI Changes",
+            title: `Someone Suggested An New Feature Or Sent A FeedBack (${s})`,
             description: clean,
-            fields: [{ name: "Their UserID (Used To Ban Them)", value: String(userid), inline: false }],
+            fields: [
+                { name: "Their UserID (Used To Ban Them)", value: String(u), inline: false },
+                { name: "Their Executor (Used To Know Bugs Better)", value: String(e), inline: false }
+            ],
             timestamp: new Date().toISOString()
           }
         ]
       })
     })
   } catch (err) {
-    console.error("Something Went Wrong: ", err)
+    console.error("Error: ", err)
   }
-
   return res.status(200).json({ ok: true })
 }
