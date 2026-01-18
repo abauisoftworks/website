@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   const u = body.userid || "0"
   const m = body.message || ""
   const e = body.executor || "Spoofed Or Skidded Or Unknown"
-  const s = body.script || "Spoofed Or Unknown" 
+  const s = body.script || "Sp00fed" 
   const clean = m.replace(/@everyone|@here/g, "").replace(/<@&?\d+>/g, "[mention]")
   const webhook = process.env.FEEDBACK_HOOK
   if (!webhook) return res.status(500).json({ error: "No WebHook" })
@@ -21,11 +21,12 @@ export default async function handler(req, res) {
         content: "<@1138813124946956298>",
         embeds: [
           {
-            title: `Someone Suggested An New Feature Or Sent A FeedBack (${s})`,
+            title: `Someone Suggested An New Feature Or Sent An FeedBack`,
             description: clean,
             fields: [
                 { name: "Their UserID (Used To Ban Them)", value: String(u), inline: false },
                 { name: "Their Executor (Used To Know Bugs Better)", value: String(e), inline: false }
+                { name: "Which Script Was Used", value: String(s), inline: false }
             ],
             timestamp: new Date().toISOString()
           }
