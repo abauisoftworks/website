@@ -25,7 +25,7 @@ export default async function handler(req, res) {
             description: clean,
             fields: [
                 { name: "Their UserID (Used To Ban Them)", value: String(u), inline: false },
-                { name: "Their Executor (Used To Know Bugs Better)", value: String(e), inline: false }
+                { name: "Their Executor (Used To Know Bugs Better)", value: String(e), inline: false },
                 { name: "Which Script Was Used", value: String(s), inline: false }
             ],
             timestamp: new Date().toISOString()
