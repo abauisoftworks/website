@@ -1,13 +1,14 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abaui - Roblox Exploit Community</title>
+    <meta name="description" content="A Roblox Website For Exploiters. We Have Our Scripts: Abaui Hub And Wild Hub, Executors: Delta, Arceus X, Swift.">
+    <link rel="canonical" href="https://abaui.vercel.app">
     <meta property="og:title" content="Abaui - Home">
-    <meta property="og:description" content="New Roblox Website For Exploiters. We Have a Our Scripts, (Not Ours) Executors, Community Scripts And Maybe More.">
+    <meta property="og:description" content="A Roblox Website For Exploiters. We Have Our Scripts: Abaui Hub And Wild Hub, Executors: Delta, Arceus X, Swift.">
     <meta property="og:image" content="https://abaui.vercel.app/icons/abaui.png">
-    <meta property="og:url" content="https://abaui-community.vercel.app">
+    <meta property="og:url" content="https://abaui.vercel.app">
     <meta property="og:type" content="website">
     <link rel="icon" href="icons/abaui.png" type="image/png">
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=general-sans@500,600,700&f[]=clash-display@600,500&display=swap" rel="stylesheet">
@@ -19,7 +20,7 @@
         <div class="logo">Abaui</div>
         <div class="nav-controls">
             <button class="theme-toggle">
-                <span class="version-text">V1.3.0</span>
+                <span class="version-text">V1.3.1</span>
                 <svg class="sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
@@ -35,7 +36,7 @@
             <ul class="nav-links">
                 <li><a href="https://discord.gg/hnq9AGVMwq" target="_blank"><span>Discord Server</span></a></li>
                 <li><a href="https://github.com/aabbaaii13" target="_blank"><span>Github Account</span></a></li>
-                <li><a href="https://www.youtube.com/@aabbaaii13" target="_blank"><span>YouTube Channel</span></a></li>
+                <li><a href="https://tiktok.com/@abauicommunity" target="_blank"><span>Tiktok Profile</span></a></li>
                 <li><a href="https://abaui.vercel.app/scripts" target="_blank"><span>Our Scripts</span></a></li>
                 <li><a href="https://abaui.vercel.app/executors" target="_blank"><span>Executors Page</span></a></li>
             </ul>
@@ -46,84 +47,40 @@
             <h2>Hello Exploiter!</h2>
             <p>We Have Free/Paid Scripts And Executors.<br>
                 <span id="responsive-text">Click ☰ To See More Options...</span><br>
-                                                                                </br>
+                <br>
                 <strong>Join Our Community In Discord Now!</strong>
             </p>
         </div>
     </header>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const theme = document.querySelector('.theme-toggle');
-            theme?.addEventListener('click', () => {
+            document.querySelector('.theme-toggle')?.addEventListener('click', () => {
                 document.documentElement.setAttribute('data-theme', 
                     document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
                 );
             });
-            const menu = document.querySelector('.menu-toggle');
-            const nav = document.querySelector('.nav-links');
-            menu?.addEventListener('click', () => {
-                nav?.classList.toggle('active');
-                menu.classList.toggle('active');
+            document.querySelector('.menu-toggle')?.addEventListener('click', () => {
+                document.querySelector('.nav-links')?.classList.toggle('active');
+                document.querySelector('.menu-toggle').classList.toggle('active');
             });
             document.addEventListener('click', (e) => {
-                if (nav?.classList.contains('active') && 
+                if (document.querySelector('.nav-links')?.classList.contains('active') && 
                     !e.target.closest('.nav-links') && 
                     !e.target.closest('.menu-toggle')) {
-                    nav.classList.remove('active');
-                    menu?.classList.remove('active');
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.menu-toggle')?.classList.remove('active');
                 }
             });
-            function update() {
-                const textElement = document.getElementById('responsive-text');
+            function mp() {
                 if (window.innerWidth > 768) {
-                    textElement.textContent = "Looking For Options? It's On Above!";
+                    document.getElementById('responsive-text').textContent = "Looking For Options? It's On Above!";
                 } else {
-                    textElement.textContent = "Click ☰ To See Options...";
+                    document.getElementById('responsive-text').textContent = "Click ☰ To See Options...";
                 }
             }
-            update();
-            window.addEventListener('resize', update);
+            mp();
+            window.addEventListener('resize', mp);
         });
-    </script>
-    <div id="user-count" style="position:fixed;bottom:20px;right:20px;padding:12px;background:var(--surface);border-radius:12px;border:1px solid var(--border-color);box-shadow:var(--glow);font-family:'General Sans',sans-serif;font-weight:500;color:var(--text);z-index:1000;display:flex;align-items:center;gap:8px;transition:all 0.3s ease;"></div>
-    <script>
-        async function updateCount(page) {
-            try {
-                const res = await fetch(`/api/pagecount?page=${page}`)
-                const data = await res.json()
-                document.getElementById('user-count').textContent = `${data.count} users online`
-                document.getElementById('user-count').style.display = 'flex'
-            } catch (e) {
-                document.getElementById('user-count').textContent = '0 users online'
-                document.getElementById('user-count').style.display = 'flex'
-            }
-        }
-
-        async function increment(page) {
-            try {
-                await fetch(`/api/pagecount?page=${page}&action=increment`, { method: 'POST' })
-           } catch (e) {}
-        }
-
-        async function decrement(page) {
-            try {
-                await fetch(`/api/pagecount?page=${page}&action=decrement`, { 
-                    method: 'POST',
-                    keepalive: true
-                })
-            } catch (e) {}
-        }
-
-        increment('home')
-        updateCount('home')
-        setInterval(() => updateCount('home'), 1000)
-
-        window.addEventListener('beforeunload', () => decrement('home'))
     </script>
 </body>
 </html>
-
-
-
-
-
