@@ -1,36 +1,23 @@
 export default async function handler(req, res) {
-  if (req.method !== "POST") 
-    return res.status(405).json({ error: "This Method Is Not Allowed!" })
-  const body = req.body || {}
-  const u = body.userid || "0"
-  const m = body.message || ""
-  const e = body.executor || "Spoofed Or Skidded Or Unknown"
-  const s = body.script || "Sp00fed" 
-  const clean = m.replace(/@everyone|@here/g, "").replace(/<@&?\d+>/g, "[mention]")
-  const webhook = process.env.FEEDBACK_HOOK
-  if (!webhook) return res.status(500).json({ error: "No WebHook" })
-  try {
-    await fetch(webhook, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        content: "<@1138813124946956298>",
-        embeds: [
-          {
-            title: `Someone Suggested An New Feature Or Sent An FeedBack`,
-            description: clean,
-            fields: [
-                { name: "Their UserID (Used To Ban Them)", value: String(u), inline: false },
-                { name: "Their Executor (Used To Know Bugs Better)", value: String(e), inline: false },
-                { name: "Which Script Was Used", value: String(s), inline: false }
-            ],
-            timestamp: new Date().toISOString()
-          }
-        ]
-      })
+  if (req.method !== "POST") return res.status(405).end();
+  if (!process.env.FEEDBACK_HOOK) return res.status(500).end();
+  await fetch(process.env.FEEDBACK_HOOK, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      content: "<@1138813124946956298>",
+      embeds: [
+        {
+          title: "Someone Suggested A New Feature Or Sent An FeedBack",
+          description: (req.body?.message || "").replace(/@everyone|@here/g, "").replace(/<@&?\d+>/g, "[mention]"),
+          fields: [
+            { name: "Which Executor Was Used:", value: String(req.body?.executor || "Spoofed"), inline: false },
+            { name: "Which Script Was Used:", value: String(req.body?.script || "Spoofed"), inline: false }
+          ],
+          timestamp: new Date().toISOString()
+        }
+      ]
     })
-  } catch (err) {
-    console.error("Error: ", err)
-  }
-  return res.status(200).json({ ok: true })
+  });
+  res.end();
 }
