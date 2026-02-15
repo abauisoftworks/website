@@ -1,133 +1,164 @@
-<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Abaui - Roblox Exploit Community</title>
-    <meta property="og:title" content="Abaui - Roblox Exploit Community" />
-    <meta property="og:description" content="Roblox Exploiting Community Website For Our Scripts, Community Scripts, More" />
-    <meta property="og:image" content="https://abaui-community.vercel.app/abaui.png" />
-    <meta property="og:url" content="https://abaui-community.vercel.app" />
+    <meta property="og:title" content="Server Maintenance" />
+    <meta property="og:description" content="Updating..." />
+    <meta property="og:image" content="https://abaui.vercel.app/abaui.svg" />
+    <meta property="og:url" content="https://abaui.vercel.app" />
     <meta property="og:type" content="website" />
-    <meta name="google-site-verification" content="M_llSAcVPHOZ95KktOgnqiXgTGiZ8lz2xNQp4zZeYFU" />
-    <link rel="icon" href="abaui.png" type="image/png" />
+    <link rel="icon" type="image/svg" href="/abaui.svg">
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&f[]=general-sans@500,600,700&f[]=clash-display@600,500&display=swap" rel="stylesheet" />
     <style>
         :root {
-        --bg: #fff;
-        --bgg: #000;
-        --bggg: #fff;
-        --text: #000;
-        --block: #fff;
-        --shadow: rgba(255, 255, 255, 5);
-        }
+            --bg: #ffffff;
+            --bgg: #f5f5f5;
+            --bggg: #ffffff;
+            --text: #1a1a1a;
+            --block: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --accent: #3c8aff;
+            --accent-hover: #2a61b4;
+        } 
         [data-theme="dark"] {
-        --bg: #000;
-        --bgg: #fff;
-        --bggg: #000;
-        --text: #fff;
-        --block: #000;
-        --shadow: rgba(0, 0, 0, 100);
+            --bg: #1a1a1a;
+            --bgg: #111111;
+            --bggg: #1a1a1a;
+            --text: #ffffff;
+            --block: #242424;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --accent: #5659d3;
+            --accent-hover: #818cf8;
         }
         body {
-        font-family: 'Satoshi', sans-serif;
-        background-color: var(--bgg);
-        color: var(--text);
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
+            font-family: 'Satoshi', sans-serif;
+            background-color: var(--bgg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            transition: background-color 0.3s ease;
         }
         .hero {
-        background: var(--block);
-        padding: 3rem 2rem;
-        border-radius: 2rem;
-        box-shadow: 0 0 30px var(--shadow);
-        text-align: center;
-        max-width: 350px;
-        max-height: 250px;
-        width: 90%;
-        position: relative;
+            background: var(--block);
+            padding: 3.5rem 3rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px var(--shadow);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            transition: all 0.3s ease;
         }
         .hero h1 {
-        font-family: 'Clash Display', sans-serif;
-        font-size: 1.9rem;
-        margin-bottom: 0.5rem;
+            font-family: 'Clash Display', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .hero p {
-        font-family: 'General Sans', sans-serif;
-        font-size: 1rem;
-        margin-bottom: 2rem;
-        line-height: 1.6;
+            font-family: 'General Sans', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            color: var(--text);
+            opacity: 0.9;
         }
         .hero-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
-        .btn {
-        background: var(--text);
-        color: var(--bggg);
-        padding: 0.7rem 1.5rem;
-        border-radius: 1rem;
-        text-decoration: none;
-        font-weight: 600;
+        .buton {
+            background: var(--accent);
+            color: #ffffff;
+            padding: 0.9rem 1.8rem;
+            border-radius: 1rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        .buton:hover {
+            background: var(--accent-hover);
         }
         .theme-toggle {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        background: none;
-        border: none;
-        cursor: pointer;
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: var(--bgg);
+            border: none;
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+            background: var(--accent);
         }
         .theme-toggle svg {
-        width: 22px;
-        height: 22px;
-        display: none;
+            width: 20px;
+            height: 20px;
+            display: none;
+            color: var(--text);
+        }
+        .theme-toggle:hover svg {
+            color: #ffffff;
         }
         [data-theme="light"] .sun {
-        display: block;
+            display: block;
         }
         [data-theme="dark"] .moon {
-        display: block;
-        color: var(--bgg);
+            display: block;
+        }
+        @media (max-width: 480px) {
+            .hero {
+                padding: 2.5rem 1.5rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .buton {
+                padding: 0.8rem 1.4rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="hero">
-    <h1>Abaui - Maintenance</h1>
-    <p>The Website Is Currently Undergoing Update.<br>Please Come Back Later.</p>
-    <div class="hero-buttons">
-        <a href="https://discord.gg/hnq9AGVMwq" class="btn">Join Discord</a>
-        <a href="https://github.com/aabbaaii13" class="btn">View GitHub</a>
+        <h1>Server Maintenance</h1>
+        <p>We Are Currently Updating The Website To Bring You A Better Experience.<br>Comeback Later!</p>
+        <div class="hero-buttons">
+            <a href="https://discord.gg/hnq9AGVMwq" class="buton">Discord Server</a>
+        <div class="header-buttons">
+            <button class="theme-toggle">
+                <svg class="sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+                <svg class="moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+            </button>
+        </div>
     </div>
-    <div class="header-buttons">
-        <button class="theme-toggle" aria-label="Toggle Theme">
-        <svg class="sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-        <svg class="moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-        </button>
-    </div>
-    </div>
-    <script>
-        const toggle = document.querySelector('.theme-toggle');
-        const html = document.documentElement;
-
-        toggle.addEventListener('click', () => {
-            const currenttheme = html.getAttribute('data-theme');
-            const newtheme = currenttheme === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', newtheme);
+    <script> 
+        document.querySelector('.theme-toggle').addEventListener('click', () => {
+            document.documentElement.setAttribute('data-theme', document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
         });
     </script>
 </body>
 </html>
-
