@@ -12,6 +12,15 @@
   "rewrites": [
     { "source": "/raw/(.*)", "destination": "/raw/$1.lua" },
     { "source": "/raw/(.*)", "destination": "/raw/$1.txt" },
-    { "source": "/((?!api/|raw/).*)", "destination": "/soon.html" }
+    { "source": "/raw", "destination": "/raw/index.html" },
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/api", "destination": "/api/index.js" },
+    { "source": "/", "destination": "/soon.html" },
+    { "source": "/index.html", "destination": "/soon.html" },
+    { "source": "/scripts", "destination": "/soon.html" },
+    { "source": "/scripts.html", "destination": "/soon.html" },
+    { "source": "/executors", "destination": "/soon.html" },
+    { "source": "/executors.html", "destination": "/soon.html" },
+    { "source": "/(.*)", "destination": "/soon.html" }
   ]
 }
