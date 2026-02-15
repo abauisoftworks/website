@@ -12,9 +12,5 @@
   "rewrites": [
     { "source": "/raw/(.*)", "destination": "/raw/$1.lua" },
     { "source": "/raw/(.*)", "destination": "/raw/$1.txt" },
-    { "source": "/raw", "destination": "/raw/index.html" },
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/api", "destination": "/api/index.js" },
-    { "source": "/(.*)", "destination": "/soon.html" }
   ]
 }
