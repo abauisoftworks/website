@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
-  if (!process.env.FEEDBACK_HOOK) return res.status(500).end();
-  await fetch(process.env.FEEDBACK_HOOK, {
+  if (!process.env.FEEDBACK) return res.status(500).end();
+  await fetch(process.env.FEEDBACK, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify({
